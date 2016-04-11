@@ -40,9 +40,6 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `facebook_id`, `first_name`, `last_name`, `email`, `picture`, `evaluation`) VALUES
-(3, 10207846588875184, 'Jonathan', 'Clerc', 'jices@hotmail.fr', '', '0');
-
 --
 -- Indexes for dumped tables
 --
