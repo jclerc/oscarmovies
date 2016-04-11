@@ -4,14 +4,14 @@ BIENVENUE<br>
 
   $fb = new Facebook\Facebook([
   'app_id' => '1372343316125328', // Replace {app-id} with your app id
-  'app_secret' => '{app-secret}',
+  'app_secret' => 'a1f81f07cfc0e5e9e2958e5131fd2d6b',
   'default_graph_version' => 'v2.2',
   ]);
 
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('https://example.com/fb-callback.php', $permissions);
+$loginUrl = $helper->getLoginUrl('http://localhost:8888/Facebook.class.php', $permissions);
 
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
