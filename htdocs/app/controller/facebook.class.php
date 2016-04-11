@@ -58,7 +58,7 @@ class Facebook extends Controller {
         var_dump($tokenMetadata);
 
         // Validation (these will throw FacebookSDKException's when they fail)
-        $tokenMetadata->validateAppId(1372343316125328); // Replace {app-id} with your app id
+        $tokenMetadata->validateAppId('1372343316125328'); // Replace {app-id} with your app id
         // If you know the user ID this access token belongs to, you can validate it here
         //$tokenMetadata->validateUserId('123');
         $tokenMetadata->validateExpiration();
@@ -68,7 +68,7 @@ class Facebook extends Controller {
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
           } catch (Facebook\Exceptions\FacebookSDKException $e) {
-            echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
+            // echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
             exit;
           }
 
