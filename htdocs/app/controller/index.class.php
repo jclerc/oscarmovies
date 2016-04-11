@@ -29,12 +29,16 @@ class Index extends Controller {
 
             $user = $response->getGraphUser();
 
-            $this->set('name', $user['name']);
+            $this->set('username', $user->getName());
 
         } else {
-            $this->set('name', 'INCONNU');
+            $this->set('username', 'INCONNU');
         }
 
+        $helper = $fb->getRedirectLoginHelper();
+
+        $permissions = ['email']; // Optional permissions
+        $this->set('loginUrl', e($helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions)));
 
     }
 
