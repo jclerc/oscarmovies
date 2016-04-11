@@ -1,11 +1,11 @@
-{    
+{
 
     "debug": true,
 
     "database": {
         "use": "MySQL",
         "available": {
-            "MySQL": ["localhost", "oscar", "root", "root"],
+            "MySQL": ["127.0.0.1:3306", "igniviha_oscar", "igniviha_john", "S34I;e[Kb}@N"],
             "SQLite": ["../database.sqlite"]
         }
     },
