@@ -1,2 +1,0 @@
-# Prevent rewriting non-existing resource
-RewriteEngine Off
