@@ -18,6 +18,37 @@ class Auth extends Service {
         return $this->session->get(self::TOKEN_NAME);
     }
 
+    public function getLoginUrl() {
+        $helper = $this->facebook->getRedirectLoginHelper();
+
+        // Optional permissions
+        $permissions = ['email'];
+
+        return $helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions);
+    }
+
+    public function getLogoutUrl() {
+        return '/facebook/logout/';
+    }
+
+    public function getUser() {
+        if ($this->isLogged()) {
+            try {
+                // Returns a `Facebook\FacebookResponse` object
+                $response = $this->facebook->get('/me', $this->session->get('fb_access_token'));
+
+                return $response->getGraphUser();
+
+            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                // echo 'Graph returned an error: ' . $e->getMessage();
+                // exit;
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                // echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                // exit;
+            }
+        }
+    }
+
     public function connect() {
         $fb = $this->facebook;
 

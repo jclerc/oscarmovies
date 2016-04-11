@@ -14,30 +14,19 @@ class Index extends Controller {
 
         $this->set('username', 'INCONNU');
 
-          $fb = $this->facebook;
-          
-          if ($this->session->has('fb_access_token')) {
-            try {
-                // Returns a `Facebook\FacebookResponse` object
-                $response = $fb->get('/me', $this->session->get('fb_access_token'));
+        if ($this->auth->isLogged()) {
 
-                $user = $response->getGraphUser();
+            $user = $this->auth->getUser();
+
+            if (!empty($user)) {
                 $this->set('username', $user->getName());
-
-            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                // echo 'Graph returned an error: ' . $e->getMessage();
-                // exit;
-            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                // echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                // exit;
             }
 
         }
 
-        $helper = $fb->getRedirectLoginHelper();
+        $this->set('loginUrl', $this->auth->getLoginUrl());
+        $this->set('logoutUrl', $this->auth->getLogoutUrl());
 
-        $permissions = ['email']; // Optional permissions
-        $this->set('loginUrl', $helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions));
     }
 
 }
