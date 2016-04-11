@@ -40,14 +40,18 @@ class Facebook extends Controller {
                 try {
                     $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
 
-                    // And success !
+                    // Update token
                     $this->session->set('fb_access_token', (string) $accessToken);
-                    $this->flash->success('Connexion à Facebook réussie !');
                     $request->redirect();
 
                 } catch (\Facebook\Exceptions\FacebookSDKException $e) {
                     // echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
                 }
+            } else {
+                // And success !
+                $this->session->set('fb_access_token', (string) $accessToken);
+                $this->flash->success('Connexion à Facebook réussie !');
+                $request->redirect();
             }
 
         } catch(\Facebook\Exceptions\FacebookResponseException $e) {
