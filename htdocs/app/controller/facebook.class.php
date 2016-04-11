@@ -42,6 +42,7 @@ class Facebook extends Controller {
 
                     // Update token
                     $this->session->set('fb_access_token', (string) $accessToken);
+                    $this->flash->success('Connexion à Facebook réussie !');
                     $request->redirect();
 
                 } catch (\Facebook\Exceptions\FacebookSDKException $e) {
