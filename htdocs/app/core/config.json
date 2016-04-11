@@ -3,9 +3,9 @@
     "debug": true,
 
     "database": {
-        "use": "",
-        "avaliable": {
-            "MySQL": ["localhost", "movies", "root", "root"],
+        "use": "MySQL",
+        "available": {
+            "MySQL": ["localhost", "oscar", "root", "root"],
             "SQLite": ["../database.sqlite"]
         }
     },

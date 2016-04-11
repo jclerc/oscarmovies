@@ -19,13 +19,14 @@ class App {
     public function start(Container $container, array $config) {
 
         $dbType = $config['database']['use'];
-        $dbConfig = isset($config['database']['avaliable'][ $dbType ]) ? $config['database']['avaliable'][ $dbType ] : null;
+        $dbConfig = isset($config['database']['available'][ $dbType ]) ? $config['database']['available'][ $dbType ] : null;
 
         if (!empty($dbType) and !empty($dbConfig)) {
             // Share Database
             $dbclass = 'Database\\' . $dbType;
             $database = new $dbclass($dbConfig);
             $container->share('Database', $database);
+            var_dump(this); exit;
         }
 
         // Start Session
