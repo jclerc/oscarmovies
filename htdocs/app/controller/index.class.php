@@ -22,10 +22,12 @@ class Index extends Controller {
                 $this->set('username', $user->getName());
             }
 
+            $this->set('logoutUrl', $this->auth->getLogoutUrl());
+        } else {
+            $this->set('loginUrl', $this->auth->getLoginUrl());
         }
 
-        $this->set('loginUrl', $this->auth->getLoginUrl());
-        $this->set('logoutUrl', $this->auth->getLogoutUrl());
+        $this->set('weather', $this->api->weather->getCurrent());
 
     }
 

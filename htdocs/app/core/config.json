@@ -5,8 +5,11 @@
     "database": {
         "use": "MySQL",
         "available": {
-            "MySQL": ["127.0.0.1:3306", "igniviha_oscar", "igniviha_john", "S34I;e[Kb}@N"],
+            "MySQL": ["localhost", "oscar", "root", "root"],
             "SQLite": ["../database.sqlite"]
+        },
+        "disabled": {
+            "MySQL": ["127.0.0.1:3306", "igniviha_oscar", "igniviha_john", "S34I;e[Kb}@N"]
         }
     },
 
@@ -19,7 +22,11 @@
         "flash":    "Model\\Service\\Flash",
         "mail":     "Model\\Service\\Mail",
         "request":  "Model\\Service\\Request",
-        "validate": "Model\\Service\\Validate"
+        "validate": "Model\\Service\\Validate",
+        "api": {
+            "weather": "Model\\Api\\Weather",
+            "ip":      "Model\\Api\\Ip"
+        }
     }
 
 }

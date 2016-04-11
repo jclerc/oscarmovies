@@ -129,6 +129,7 @@ set_exception_handler(function (Exception $ex) {
  *
  */
 $config = json_decode(file_get_contents(CORE . 'config.json'), true);
+if (empty($config)) exit('/app/core/config.json cannot be parsed');
 define('DEBUG', $config['debug']);
 
 

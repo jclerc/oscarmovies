@@ -2,7 +2,14 @@ BIENVENUE<br>
 
 <?= $this->flash->build() ?>
 
-<a href="<?= e($loginUrl) ?>">Log in with Facebook!</a>
-<a href="<?= e($logoutUrl) ?>">Log out!</a>
+<?php if (isset($loginUrl)): ?>
+    <a href="<?= e($loginUrl) ?>">Log in with Facebook!</a>
+<?php endif; ?>
 
-NOM: <?= $username ?>
+<?php if (isset($logoutUrl)): ?>
+    <a href="<?= e($logoutUrl) ?>">Log out!</a>
+<?php endif; ?>
+
+<h2>NOM: <?= $username ?></h2>
+
+<h4>METEO: <?= $weather->main ?> <small>(<?= $weather->description ?>)</small></h4>

@@ -17,7 +17,15 @@ class Container {
 
     // Create from class name
     public function create($class) {
-        return new $class($this);
+        if (is_string($class))
+            return new $class($this);
+        else if (is_array($class)) {
+            $obj = new \stdClass;
+            foreach ($class as $name => $c) {
+                $obj->$name = $this->create($c);
+            }
+            return $obj;
+        }
     }
 
     // Share same object
