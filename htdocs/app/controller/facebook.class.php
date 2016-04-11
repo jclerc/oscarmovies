@@ -11,6 +11,7 @@ class Facebook extends Controller {
 
     public function logout(Request $request) {
         $this->auth->logout();
+        $this->flash->success('Déconnexion de Facebook réussie !');
         $request->redirect();
     }
 
