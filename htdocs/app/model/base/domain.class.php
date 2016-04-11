@@ -72,7 +72,7 @@ abstract class Domain extends Model {
         $coll = [];
 
         foreach ($rows as $row) {
-            $obj = $this->create();
+            $obj = $this->another();
             if ($obj->fromEntry($row)) {
                 $coll[] = $obj;
             }

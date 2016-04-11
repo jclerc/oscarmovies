@@ -50,7 +50,7 @@ abstract class Injectable {
         return null;
     }
 
-    public function create() {
+    public function another() {
         return $this->di->create(get_class($this));
     }
 

@@ -2,20 +2,24 @@
 
 namespace Model\Service;
 use Model\Base\Service;
+use Model\Domain\User;
 
 /**
  * Auth service
  */
 class Auth extends Service {
 
-    const TOKEN_NAME = 'fb_access_token';
+    const ACCESS_ID = 'fb_access_id';
+    const ACCESS_TOKEN = 'fb_access_token';
+
+    private $user = null;
 
     public function isLogged() {
-        return $this->session->has(self::TOKEN_NAME);
+        return $this->session->has(self::ACCESS_TOKEN);
     }
 
     public function getToken() {
-        return $this->session->get(self::TOKEN_NAME);
+        return $this->session->get(self::ACCESS_TOKEN);
     }
 
     public function getLoginUrl() {
@@ -32,21 +36,14 @@ class Auth extends Service {
     }
 
     public function getUser() {
-        if ($this->isLogged()) {
-            try {
-                // Returns a `Facebook\FacebookResponse` object
-                $response = $this->facebook->get('/me', $this->session->get('fb_access_token'));
-
-                return $response->getGraphUser();
-
-            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                // echo 'Graph returned an error: ' . $e->getMessage();
-                // exit;
-            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                // echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                // exit;
+        if (!isset($this->user)) {
+            $user = $this->di->create(User::class);
+            if ($this->session->has(self::ACCESS_ID)) {
+                $user->fromProperty('id', $this->session->get(self::ACCESS_ID));
             }
+            $this->user = $user;
         }
+        return $this->user;
     }
 
     public function connect() {
@@ -75,7 +72,8 @@ class Auth extends Service {
                     $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
 
                     // Update token
-                    $this->session->set('fb_access_token', (string) $accessToken);
+                    $this->session->set(self::ACCESS_TOKEN, (string) $accessToken);
+                    $this->makeUser();
                     return true;
 
                 } catch (\Facebook\Exceptions\FacebookSDKException $e) {
@@ -83,7 +81,8 @@ class Auth extends Service {
                 }
             } else {
                 // And success !
-                $this->session->set('fb_access_token', (string) $accessToken);
+                $this->session->set(self::ACCESS_TOKEN, (string) $accessToken);
+                $this->makeUser();
                 return true;
             }
 
@@ -102,7 +101,47 @@ class Auth extends Service {
     }
 
     public function logout() {
-        $this->session->delete('fb_access_token');
+        $this->session->delete(self::ACCESS_TOKEN);
+    }
+
+    private function makeUser() {
+        try {
+            // Returns a `Facebook\FacebookResponse` object
+            $response = $this->facebook->get('/me?fields=id,first_name,last_name,gender,email,picture', $this->getToken());
+            $graph = $response->getGraphUser();
+
+            $user = $this->di->create(User::class);
+            $user->fromProperty('facebook_id', $graph->getId());
+
+            if ($user->exists()) {
+                $user->set([
+                    'first_name'  => $graph->getFirstName(),
+                    'last_name'   => $graph->getLastName(),
+                    'email'       => $graph->getEmail(),
+                    'picture'     => '', // $graph->getPicture(),
+                ]);
+            } else {
+                $user->create([
+                    'facebook_id' => $graph->getId(),
+                    'first_name'  => $graph->getFirstName(),
+                    'last_name'   => $graph->getLastName(),
+                    'email'       => $graph->getEmail(),
+                    'picture'     => '', // $graph->getPicture(),
+                ]);
+            }
+
+            $user->save();
+
+            $this->session->set(self::ACCESS_ID, $user->getId());
+            $this->user = $user;
+
+        } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+            // echo 'Graph returned an error: ' . $e->getMessage();
+            // exit;
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            // echo 'Facebook SDK returned an error: ' . $e->getMessage();
+            // exit;
+        }
     }
 
 }
