@@ -11,9 +11,9 @@ use Model\Base\Service;
  */
 class Mail extends Service {
 
-    const DEFAULT_NAME     = 'QForm';
-    const DEFAULT_USERNAME = 'qform.service@gmail.com';
-    const DEFAULT_PASSWORD = '';
+    const DEFAULT_NAME     = ''; // Name
+    const DEFAULT_USERNAME = ''; // Gmail address
+    const DEFAULT_PASSWORD = ''; // Gmail password
 
     public function send($subject, $recipient, $html, $data = null) {
         $mail = $this->build();
