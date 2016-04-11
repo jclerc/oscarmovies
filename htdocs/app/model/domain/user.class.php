@@ -18,7 +18,7 @@ class User extends Domain {
     ];
 
     public function getName() {
-        $this->get('first_name') . ' ' . $this->get('last_name');
+        return $this->get('first_name') . ' ' . $this->get('last_name');
     }
 
     public function fromFacebookId($id) {
