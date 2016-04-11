@@ -11,7 +11,7 @@ BIENVENUE<br>
 $helper = $fb->getRedirectLoginHelper();
 
 $permissions = ['email']; // Optional permissions
-$loginUrl = $helper->getLoginUrl('http://localhost:8888/Facebook.class.php', $permissions);
+$loginUrl = $helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions);
 
 echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
 
