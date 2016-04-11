@@ -118,7 +118,7 @@ class Auth extends Service {
                     'first_name'  => $graph->getFirstName(),
                     'last_name'   => $graph->getLastName(),
                     'email'       => $graph->getEmail(),
-                    'picture'     => '', // $graph->getPicture(),
+                    'picture'     => $graph->getPicture()->getUrl(),
                 ]);
             } else {
                 $user->create([
@@ -126,7 +126,7 @@ class Auth extends Service {
                     'first_name'  => $graph->getFirstName(),
                     'last_name'   => $graph->getLastName(),
                     'email'       => $graph->getEmail(),
-                    'picture'     => '', // $graph->getPicture(),
+                    'picture'     => $graph->getPicture()->getUrl(),
                 ]);
             }
 
