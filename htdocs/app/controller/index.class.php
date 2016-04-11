@@ -19,7 +19,7 @@ class Index extends Controller {
           if ($this->session->has('fb_access_token')) {
             try {
                 // Returns a `Facebook\FacebookResponse` object
-                $response = $fb->get('/me?fields=id,name', $this->session->get('fb_access_token'));
+                $response = $fb->get('/me', $this->session->get('fb_access_token'));
 
                 $user = $response->getGraphUser();
                 $this->set('username', $user->getName());

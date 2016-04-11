@@ -14,6 +14,7 @@
         "cookie":   "Model\\Mapper\\Cookie",
         "session":  "Model\\Mapper\\Session",
         "asset":    "Model\\Service\\Asset",
+        "auth":     "Model\\Service\\Auth",
         "crypt":    "Model\\Service\\Crypt",
         "flash":    "Model\\Service\\Flash",
         "mail":     "Model\\Service\\Mail",
