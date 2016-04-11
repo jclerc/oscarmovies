@@ -23,10 +23,18 @@ abstract class Domain extends Model {
             throw new InternalException('Properties of class ' . get_class($this) . ' are not set');
         }
         foreach ($this->properties as $key => $v) {
+
             if (isset($properties[$key])) {
                 $this->set($key, $properties[$key]);
+
             } else {
-                throw new InternalException('Properties given don\'t have the same keys as properties of ' . get_class($this));
+                $method = '__default' . ucfirst(snakeToCamel($key));
+                // $this->__setPascalCase();
+                if (method_exists($this, $method)) {
+                    $this->set($key, $this->$method());
+                } else {
+                    throw new InternalException('Properties given don\'t have the same keys as properties of ' . get_class($this));
+                }
             }
         }
         $this->created = true;
@@ -159,8 +167,10 @@ abstract class Domain extends Model {
 
     public function save() {
         if ($this->exists()) {
+            $this->onUpdate();
             $this->database->update($this->properties)->where('id', $this->getId())->into($this->getTable());
         } else if ($this->created) {
+            $this->onCreate();
             $this->database->insert($this->properties)->into($this->getTable());
             $this->id = $this->database->lastInsertId();
         } else {
@@ -198,6 +208,8 @@ abstract class Domain extends Model {
         return true;
     }
 
+    protected function onCreate() {}
+    protected function onUpdate() {}
     protected function onDelete() {}
 
 }
