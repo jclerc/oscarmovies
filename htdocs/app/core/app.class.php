@@ -26,6 +26,7 @@ class App {
             $dbclass = 'Database\\' . $dbType;
             $database = new $dbclass($dbConfig);
             $container->share('Database', $database);
+            var_dump(this); exit;
         }
 
         // Start Session
