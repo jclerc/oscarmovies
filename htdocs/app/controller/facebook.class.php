@@ -9,6 +9,11 @@ use Model\Service\Request;
  */
 class Facebook extends Controller {
 
+    public function logout(Request $request) {
+      $this->session->delete('fb_access_token');
+      $request->redirect();
+    }
+
     public function connect(Request $request) {
 
         $fb = $this->facebook;
@@ -34,7 +39,7 @@ class Facebook extends Controller {
                 // Exchanges a short-lived access token for a long-lived one
                 try {
                     $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-                    
+
                     // And success !
                     $this->session->set('fb_access_token', (string) $accessToken);
                     $this->flash->success('Connexion à Facebook réussie !');

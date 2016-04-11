@@ -14,14 +14,13 @@ class Index extends Controller {
 
         $this->set('username', 'INCONNU');
 
-        if ($this->session->has('fb_access_token')) {
-
-            $fb = $this->facebook;
-
+          $fb = $this->facebook;
+          
+          if ($this->session->has('fb_access_token')) {
             try {
                 // Returns a `Facebook\FacebookResponse` object
                 $response = $fb->get('/me?fields=id,name', $this->session->get('fb_access_token'));
-                
+
                 $user = $response->getGraphUser();
                 $this->set('username', $user->getName());
 
@@ -39,7 +38,6 @@ class Index extends Controller {
 
         $permissions = ['email']; // Optional permissions
         $this->set('loginUrl', $helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions));
-
     }
 
 }
