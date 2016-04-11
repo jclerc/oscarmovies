@@ -11,21 +11,17 @@ class Facebook extends Controller {
 
     public function connect(Request $request) {
 
-        $fb = new \Facebook\Facebook([
-          'app_id' => '1372343316125328', // Replace {app-id} with your app id
-          'app_secret' => 'a1f81f07cfc0e5e9e2958e5131fd2d6b',
-          'default_graph_version' => 'v2.2',
-          ]);
+        $fb = $this->facebook;
 
         $helper = $fb->getRedirectLoginHelper();
 
         try {
           $accessToken = $helper->getAccessToken();
-        } catch(Facebook\Exceptions\FacebookResponseException $e) {
+        } catch(\Facebook\Exceptions\FacebookResponseException $e) {
           // When Graph returns an error
           echo 'Graph returned an error: ' . $e->getMessage();
           exit;
-        } catch(Facebook\Exceptions\FacebookSDKException $e) {
+        } catch(\Facebook\Exceptions\FacebookSDKException $e) {
           // When validation fails or other local issues
           echo 'Facebook SDK returned an error: ' . $e->getMessage();
           exit;
@@ -67,7 +63,7 @@ class Facebook extends Controller {
           // Exchanges a short-lived access token for a long-lived one
           try {
             $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-          } catch (Facebook\Exceptions\FacebookSDKException $e) {
+          } catch (\Facebook\Exceptions\FacebookSDKException $e) {
             // echo "<p>Error getting long-lived access token: " . $helper->getMessage() . "</p>\n\n";
             exit;
           }

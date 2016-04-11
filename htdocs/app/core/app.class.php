@@ -32,6 +32,15 @@ class App {
         $session = $container->get('Session');
         $session->start();
 
+        // Facebook
+        $container->share('Facebook', function () {
+            return new \Facebook\Facebook([
+                'app_id' => '1372343316125328',
+                'app_secret' => 'a1f81f07cfc0e5e9e2958e5131fd2d6b',
+                'default_graph_version' => 'v2.2',
+            ]);
+        });
+
         $this->container = $container;
         
     }

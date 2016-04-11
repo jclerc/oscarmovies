@@ -23,7 +23,7 @@ class Container {
     // Share same object
     public function share($key, $object) {
         $key = strtolower($key);
-        if (is_object($object)) {
+        if (is_object($object) or is_callable($object)) {
             $this->dependencies[$key] = $object;
         } else {
             $this->share($key, $this->create($object));
