@@ -24,8 +24,9 @@
         "request":  "Model\\Service\\Request",
         "validate": "Model\\Service\\Validate",
         "api": {
-            "weather": "Model\\Api\\Weather",
-            "ip":      "Model\\Api\\Ip"
+            "availability": "Model\\Api\\Availability",
+            "ip":           "Model\\Api\\Ip",
+            "weather":      "Model\\Api\\Weather"
         }
     }
 

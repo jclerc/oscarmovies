@@ -13,3 +13,5 @@ BIENVENUE<br>
 <h2>NOM: <?= $username ?></h2>
 
 <h4>METEO: <?= $weather->main ?> <small>(<?= $weather->description ?>)</small></h4>
+
+<b>Django Unchained</b>: <?= implode(', ', array_keys((array) $this->api->availability->get('Django Unchained'))) ?>
