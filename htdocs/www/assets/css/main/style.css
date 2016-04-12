@@ -34,28 +34,35 @@ body.with-nav {
 .nav .entry {
     display: block;
     margin: 25px 0;
-    padding: 5px 30px;
+    padding: 5px 32px;
     position: relative;
+    text-align: center;
 }
 
 .nav .entry.entry-large {
     padding: 0 20px;
 }
 
-.nav .entry-link {
-    border-left: 2px solid transparent;
-    border-right: 2px solid transparent;
-    transition: all .2s;
-    text-align: center;
-    transition: border .2s;
+.nav .entry-link::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all .15s;
+    transform: scaleY(0);
 }
 
-.nav .entry-link:hover {
-    border-left: 2px solid rgba(255,255,255,0.5);
+.nav .entry-link:hover::after {
+    transform: scaleY(1);
 }
 
-.nav .entry-link.active {
-    border-left: 2px solid white;
+.nav .entry-link.active::after {
+    background: #FEFEFE;
+    transform: scaleY(1);
 }
 
 .nav .entry-link .entry-fix-height {
