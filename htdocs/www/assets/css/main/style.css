@@ -1,0 +1,15 @@
+
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+}
+
+.sidebar {
+    height: 100%;
+    width: 50px;
+    background: #322C40;
+}
+
