@@ -4,7 +4,7 @@ html, body {
 }
 
 body.with-nav {
-    padding-left: 70px;
+    padding-left: 80px;
 }
 
 .nav {
@@ -12,30 +12,56 @@ body.with-nav {
     top: 0;
     left: 0;
     height: 100%;
-    width: 70px;
+    width: 80px;
     background: #322C40;
 }
 
 .nav .top-nav {
-    
+    position: absolute;
+    top: 10px;
 }
 
 .nav .bottom-nav {
-
+    position: absolute;
+    bottom: 10px;
 }
 
 .nav .group {
-
+    margin: 50px 0;
 }
 
 .nav .entry {
-    
+    display: block;
+    margin: 25px 0;
+    padding: 5px 30px;
 }
 
-.nav .entry-large {
-
+.nav .entry.entry-large {
+    padding: 0 20px;
 }
 
-.nav .entry .entry-icon {
+.nav .entry-link {
+    border-left: 2px solid transparent;
+    border-right: 2px solid transparent;
+    transition: all .2s;
+}
 
+.nav .entry-link:hover {
+    border-left-color: rgba(255,255,255,0.5);
+}
+
+.nav .entry-link.active {
+    border-left-color: white;
+}
+
+.nav .entry-link img {
+}
+
+.img-round {
+    border-radius: 50%;
+}
+
+.img-responsive {
+    width: 100%;
+    height: auto;
 }
