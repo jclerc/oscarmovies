@@ -6,7 +6,7 @@
 
     <title><?= $title ?></title>
 
-    <link href="/assets/css/main/reset.min.css" rel="stylesheet">
+    <link href="/assets/css/libs/reset.min.css" rel="stylesheet">
     <link href="/assets/css/main/style.css" rel="stylesheet">
     <?= $css ?>
 
