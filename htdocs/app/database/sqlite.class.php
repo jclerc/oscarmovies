@@ -1,7 +1,7 @@
 <?php
 
 namespace Database;
-use PDO, Exception, InternalException;
+use PDO, PDOException, InternalException;
 
 /**
  * SQLite database class
@@ -24,8 +24,8 @@ class SQLite extends SQL {
         try {
             $this->db = new PDO($dsn, null, null, $options);
             $this->db->exec('PRAGMA synchronous=OFF');
-        } catch (Exception $e) {
-            throw new InternalException('Cant connect to database: ' . $e->getMessage());
+        } catch (PDOException $e) {
+            throw new InternalException('Can\'t connect to database: ' . $e->getMessage());
         }
     }
 

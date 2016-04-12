@@ -1,7 +1,7 @@
 <?php
 
 namespace Database;
-use PDO, Exception, InternalException;
+use PDO, PDOException, InternalException;
 
 /**
  * MySQL database class
@@ -23,8 +23,8 @@ class MySQL extends SQL {
         ];
         try {
             $this->db = new PDO($dsn, $access[2], $access[3], $options);
-        } catch (Exception $e) {
-            throw new InternalException('Cant connect to database: ' . $e->getMessage());
+        } catch (PDOException $e) {
+            throw new InternalException('Can\'t connect to database: ' . $e->getMessage());
         }
     }
 
