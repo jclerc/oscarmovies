@@ -6,8 +6,7 @@
 
     <title><?= $title ?></title>
 
-    <!-- <link href="/assets/css/main/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <link href="/assets/css/main/style.css" rel="stylesheet"> -->
+    <link href="/assets/css/main/style.css" rel="stylesheet">
     <?= $css ?>
 
 </head>

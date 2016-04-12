@@ -12,7 +12,7 @@ class Index extends View {
         $this->set('title', 'Bienvenue');
         $this->render([
             'parts/head/default',
-            'parts/navbar/home',
+            'parts/navbar/default',
             'page/home/index',
             'parts/footer/default'
         ]);
