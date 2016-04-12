@@ -33,7 +33,7 @@ class Auth extends Service {
         return $this->request->getBaseUrl() . 'facebook/logout/?redirect=' . $redirect;
     }
 
-    public function getUser($property = null) {
+    public function getUser(/* $property = null */) {
         if (!isset($this->user)) {
             $user = $this->di->create(User::class);
             if ($this->session->has(self::ACCESS_ID)) {
@@ -41,9 +41,9 @@ class Auth extends Service {
             }
             $this->user = $user;
         }
-        if (isset($property))
-            return $this->user->get($property);
-        else
+        // if (isset($property))
+        //     return $this->user->get($property);
+        // else
             return $this->user;
     }
 
