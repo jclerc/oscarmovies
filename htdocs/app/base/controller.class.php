@@ -32,7 +32,7 @@ abstract class Controller extends Injectable {
 
         // Get avaliables (public and not inherited) methods
         $methods = get_class_methods($view);
-        $base = get_class_methods('Base\View');
+        $base = get_class_methods('Base\\View');
         $avaliable = array_diff($methods, $base);
 
         if (in_array($command, $avaliable)) {
@@ -47,7 +47,7 @@ abstract class Controller extends Injectable {
             return;
         }
 
-        throw new \InternalException('Error with view: "' . $resource . '" and method: "' . $command . '"');
+        throw new \InternalException('View: ' . $resource . '->' . $command . '() is not defined');
 
     }
 
