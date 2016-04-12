@@ -21,6 +21,10 @@ class User extends Domain {
         return $this->get('first_name') . ' ' . $this->get('last_name');
     }
 
+    public function getPicture() {
+        return $this->get('picture') ?: HTTP_ROOT . 'assets/img/user/default-avatar.jpg';
+    }
+
     public function fromFacebookId($id) {
         return $this->fromProperty('facebook_id', $id);
     }

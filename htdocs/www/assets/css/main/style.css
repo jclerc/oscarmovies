@@ -18,12 +18,11 @@ body.with-nav {
 
 .nav .top-nav {
     position: absolute;
-    top: 10px;
 }
 
 .nav .bottom-nav {
     position: absolute;
-    bottom: 10px;
+    bottom: 0px;
 }
 
 .nav .group {
@@ -44,6 +43,7 @@ body.with-nav {
     border-left: 2px solid transparent;
     border-right: 2px solid transparent;
     transition: all .2s;
+    text-align: center;
 }
 
 .nav .entry-link:hover {
@@ -54,7 +54,9 @@ body.with-nav {
     border-left-color: white;
 }
 
-.nav .entry-link img {
+.nav .entry-link .entry-fix-height {
+    height: 18px;
+    width: auto;
 }
 
 .img-round {

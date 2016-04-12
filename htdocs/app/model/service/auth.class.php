@@ -24,14 +24,16 @@ class Auth extends Service {
         // Optional permissions
         $permissions = ['email'];
 
-        return $helper->getLoginUrl('http://localhost:8888/facebook/connect/', $permissions);
+        $redirect = urlencode($this->request->getRouteUrl());
+        return $helper->getLoginUrl($this->request->getBaseUrl() . 'facebook/connect/?redirect=' . $redirect, $permissions);
     }
 
     public function getLogoutUrl() {
-        return '/facebook/logout/';
+        $redirect = urlencode($this->request->getRouteUrl());
+        return $this->request->getBaseUrl() . 'facebook/logout/?redirect=' . $redirect;
     }
 
-    public function getUser() {
+    public function getUser($property = null) {
         if (!isset($this->user)) {
             $user = $this->di->create(User::class);
             if ($this->session->has(self::ACCESS_ID)) {
@@ -39,7 +41,10 @@ class Auth extends Service {
             }
             $this->user = $user;
         }
-        return $this->user;
+        if (isset($property))
+            return $this->user->get($property);
+        else
+            return $this->user;
     }
 
     public function connect() {

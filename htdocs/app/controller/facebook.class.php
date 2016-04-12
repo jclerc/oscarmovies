@@ -12,7 +12,13 @@ class Facebook extends Controller {
     public function logout(Request $request) {
         $this->auth->logout();
         $this->flash->success('Déconnexion de Facebook réussie !');
-        $request->redirect();
+
+        $redirect = $request->getQuery('redirect');
+
+        if (!empty($redirect))
+            $request->redirect($redirect);
+        else
+            $request->redirect();
     }
 
     public function connect(Request $request) {
@@ -21,7 +27,12 @@ class Facebook extends Controller {
         } else {
             $this->flash->error('Impossible de se connecter à Facebook..');
         }
-        // Go home dude
-        $request->redirect();
+
+        $redirect = $request->getQuery('redirect');
+
+        if (!empty($redirect))
+            $request->redirect($redirect);
+        else
+            $request->redirect();
     }
 }

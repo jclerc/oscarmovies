@@ -65,12 +65,36 @@ class Request extends Service {
         return [$this->getResource(), $this->getCommand(), $this->getArgs()];
     }
 
-    public function getResource() {
-        return $this->resource;
+    public function getRouteUrl() {
+        return HTTP_ROOT . rtrim($this->getResource(false) . '/' . $this->getCommand(false) . '/' . implode('/', $this->getArgs()), '/') . '/';
     }
 
-    public function getCommand() {
-        return $this->command;
+    public function getBaseUrl() {
+        return $this->getHost() . HTTP_ROOT;
+    }
+
+    public function getHost() {
+        return 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . $this->getDomain();
+    }
+
+    public function getDomain() {
+        return $_SERVER['HTTP_HOST'] ?: $_SERVER['SERVER_NAME'];
+    }
+
+    public function getResource($withIndex = true) {
+        return ($this->resource !== 'index' or $withIndex) ? $this->resource : '';
+    }
+
+    public function hasResource() {
+        return !empty($this->resource) and $this->resource !== 'index';
+    }
+
+    public function getCommand($withIndex = true) {
+        return ($this->command !== 'index' or $withIndex) ? $this->command : '';
+    }
+
+    public function hasCommand() {
+        return !empty($this->command) and $this->command !== 'index';
     }
 
     public function getArgs() {
@@ -91,6 +115,13 @@ class Request extends Service {
 
     public function getPost() {
         return $this->post;
+    }
+
+    public function getQuery($key = null) {
+        if (isset($key))
+            return isset($_GET[$key]) ? $_GET[$key] : null;
+        else
+            return $_GET;
     }
 
     public function isGet() {
