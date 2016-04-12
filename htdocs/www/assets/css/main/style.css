@@ -1,15 +1,41 @@
 
-html {
+html, body {
     height: 100%;
 }
 
-body {
-    min-height: 100%;
+body.with-nav {
+    padding-left: 70px;
 }
 
-.sidebar {
+.nav {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
-    width: 50px;
+    width: 70px;
     background: #322C40;
 }
 
+.nav .top-nav {
+    
+}
+
+.nav .bottom-nav {
+
+}
+
+.nav .group {
+
+}
+
+.nav .entry {
+    
+}
+
+.nav .entry-large {
+
+}
+
+.nav .entry .entry-icon {
+
+}

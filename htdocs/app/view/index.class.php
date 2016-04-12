@@ -9,10 +9,9 @@ use Base\View;
 class Index extends View {
 
     public function index() {
-        $this->set('title', 'Bienvenue');
+        $this->set('title', 'Welcome');
         $this->render([
-            'parts/head/default',
-            'parts/navbar/default',
+            'parts/head/no-nav',
             'page/home/index',
             'parts/footer/default'
         ]);

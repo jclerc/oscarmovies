@@ -11,4 +11,4 @@
     <?= $css ?>
 
 </head>
-<body class="with-nav">
+<body class="without-nav">
