@@ -9,6 +9,13 @@ body.with-nav {
     padding-left: 80px;
 }
 
+/*
+ * --------------------------------
+ *           Navigation
+ * --------------------------------
+ *
+ */
+
 .nav {
     position: absolute;
     top: 0;
@@ -112,6 +119,13 @@ body.with-nav {
     margin-top: -5px;
 }
 
+/*
+ * --------------------------------
+ *           UI Elements
+ * --------------------------------
+ *
+ */
+
 .img-round {
     border-radius: 50%;
 }
@@ -119,4 +133,182 @@ body.with-nav {
 .img-responsive {
     width: 100%;
     height: auto;
+}
+
+/*
+ * --------------------------------
+ *           Side Panel
+ * --------------------------------
+ *
+ */
+
+.side-panel {
+    position: relative;
+    height: 100%;
+}
+
+.side-panel .left-content {
+    position: absolute;
+    top: 0;
+    right: 300px;
+    left: 0;
+    bottom: 0;
+    background: #FEFEFE;
+}
+
+.side-panel .right-content {
+    position: absolute;
+    top: 0;
+    width: 300px;
+    right: 0;
+    bottom: 0;
+    background: #3D3D45;
+}
+
+/*
+ * --------------------------------
+ *             Chat
+ * --------------------------------
+ *
+ */
+
+.chat {
+    height: 100%;
+}
+
+.chat .messages {
+    padding: 50px 100px;
+    position: relative;
+    overflow: scroll;
+    height: 100%;
+}
+
+.chat .messages .message {
+    width: 100%;
+    max-width: 500px;
+    min-height: 80px;
+    position: relative;
+    line-height: 80px;
+}
+
+.chat .message-oscar {
+    padding-left: 90px;
+    float: left;
+}
+
+.chat .message .avatar {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    line-height: 80px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.chat .message .content {
+    background: black;
+    display: inline-block;
+    line-height: 18px;
+    padding: 5px 10px;
+    color: white;
+    vertical-align: middle;
+    border-radius: 5px;
+}
+
+.chat .message-oscar .avatar {
+    background: #1B1B24;
+    left: 0;
+}
+
+.chat .message-oscar .avatar img {
+    width: 32px;
+    height: auto;
+    vertical-align: middle;
+}
+
+.chat .message-oscar .content {
+    background: #1B1B24;
+    position: relative;
+}
+
+.chat .message-oscar .content::after {
+    right: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-right-color: #1B1B24;
+    border-width: 5px;
+    margin-top: -5px;
+}
+
+.chat .message-user {
+    padding-right: 90px;
+    float: right;
+}
+
+.chat .message-user .avatar {
+    right: 0;
+}
+
+.chat .message-user .avatar img {
+    width: 100%;
+    height: 100%;
+}
+
+.chat .message-user .content {
+    background: #554B6D;
+    position: relative;
+}
+
+.chat .message-user .content::after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: transparent;
+    border-left-color: #1B1B24;
+    border-width: 5px;
+    margin-top: -5px;
+}
+
+.chat .chat-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    border-top: 1px solid #DDDDDD;
+    padding-right: 120px;
+}
+
+.chat .chat-box .chat-input {
+    display: block;
+    height: 100%;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #FEFEFE;
+    padding: 0 30px;
+}
+
+.chat .chat-box .chat-submit {
+    position: absolute;
+    display: block;
+    height: 100%;
+    bottom: 0;
+    width: 120px;
+    right: 0;
+    background: #F4F4F4;
+    cursor: pointer;
+    text-transform: uppercase;
 }

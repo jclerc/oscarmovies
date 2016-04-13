@@ -105,7 +105,7 @@ class Auth extends Service {
     private function processConnect($token) {
         try {
             // Returns a `Facebook\FacebookResponse` object
-            $response = $this->facebook->get('/me?fields=id,first_name,last_name,gender,email,picture', $token);
+            $response = $this->facebook->get('/me?fields=id,first_name,last_name,gender,email,picture.width(200).height(200)', $token);
             $graph = $response->getGraphUser();
 
             $user = $this->di->create(User::class);

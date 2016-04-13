@@ -1,6 +1,43 @@
 
-CHAT
+
+<div class="side-panel">
+    
+    <div class="left-content">
+        <div class="chat">
+            <div class="messages">
+                <div class="message message-oscar">
+                    <div class="avatar"><img src="/assets/img/ghost/discussion.svg" alt=""></div>
+                    <div class="content">Bonjour Arnaud, je suis Oscar ! Je suis là pour vous aider à choisir un film pour ce soir afin de conclure avec votre date. </div>
+                </div>
+                <div class="message message-user">
+                    <div class="avatar"><img src="{{ this.auth.getUser().getPicture() }}" alt=""></div>
+                    <div class="content">Bonjour Arnaud, je suis Oscar ! Je suis là pour vous aider à choisir un film pour ce soir afin de conclure avec votre date. </div>
+                </div>
+                <div class="message message-oscar">
+                    <div class="avatar"><img src="/assets/img/ghost/discussion.svg" alt=""></div>
+                    <div class="content">Bonjour Arnaud, je suis Oscar ! Je suis là pour vous aider à choisir un film pour ce soir afin de conclure avec votre date. </div>
+                </div>
+                <div class="message message-user">
+                    <div class="avatar"><img src="{{ this.auth.getUser().getPicture() }}" alt=""></div>
+                    <div class="content">Bonjour Arnaud, je suis Oscar ! Je suis là pour vous aider à choisir un film pour ce soir afin de conclure avec votre date. </div>
+                </div>
+                <div class="message message-oscar">
+                    <div class="avatar"><img src="/assets/img/ghost/discussion.svg" alt=""></div>
+                    <div class="content">Bonjour Arnaud, je suis Oscar ! Je suis là pour vous aider à choisir un film pour ce soir afin de conclure avec votre date. </div>
+                </div>
+            </div>
+            <form class="chat-box" method="POST">
+                    <input type="text" class="chat-input" placeholder="Your message..">
+                    <button type="submit" class="chat-submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="right-content">
+        SWAG
+    </div>
+
+</div>
 
 
-<img src="{{ this.api.giphy.get('lol') }}" alt="">
 
