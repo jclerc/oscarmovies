@@ -25,6 +25,7 @@
         "validate": "Model\\Service\\Validate",
         "api": {
             "availability": "Model\\Api\\Availability",
+            "giphy":        "Model\\Api\\Giphy",
             "ip":           "Model\\Api\\Ip",
             "weather":      "Model\\Api\\Weather"
         }
