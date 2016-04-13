@@ -2,6 +2,7 @@
 	background: #1B1B24;
 	color: white;
 	height: 100%;
+	perspective: 2000px;
 }
 
 .history .title{
@@ -9,7 +10,7 @@
 	text-align: center;
 	padding: 60px 0 50px 0;
 	margin: 0 20px 0 20px;
-	letter-spacing: .5px;
+	letter-spacing: .8px;
 }
 
 .history .title h2{
@@ -31,17 +32,21 @@
   	bottom: 0;
   	left: 0;
   	width: 100%;
-  	height: 65%;
+  	height: 70%;
   	//background: #505456;
   	box-shadow: 0 4px 10px #000;
   	-webkit-overflow-scrolling: touch;
   	/* for tablets */
+  	transform-style: preserve-3d;
+  	//overflow: hidden;
+
 }
 
 .touch .carousel {
   overflow: auto;
 }
 
+/*
 .carousel:before, .carousel:after {
   content: '';
   opacity: 0;
@@ -114,41 +119,46 @@
 .carousel > .indicator {
   pointer-events: none;
   position: absolute;
-  z-index: 4;
-  bottom: 50px;
+  z-index: -20;
+  bottom: 3px;
   left: 0;
   background: #322C40;
   height: 4px;
   border-radius: 10px;
   opacity: 0;
-  -webkit-transition: opacity 0.5s, bottom 0.1s;
-  		  transition: opacity 0.5s, bottom 0.1s;
+  -webkit-transition: opacity 0.1s, bottom 0.1s;
+  		  transition: opacity 0.1s, bottom 0.1s;
 }
 
 .carousel:hover > .indicator {
   opacity: 1;
   bottom: -10px;
 }
+*/
 
 .carousel > .wrap {
-  overflow: hidden;
-  border-radius: 5px;
+	margin-top: -60px;
+	padding-top: 100px;
+	height: 120%;
+  	overflow: hidden;
 }
 
 .carousel > .wrap > ul {
   list-style: none;
   white-space: nowrap;
-  height: 400px;
+  height: 310px;
+  position: absolute;
+  margin-left: 35%;
 }
 
 .carousel > .wrap > ul > li {
-  display: inline-block;
-  vertical-align: middle;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-  -webkit-transition: 1s ease-out;
-  		  transition: 1s ease-out;
+	display: inline-block;
+	vertical-align: middle;
+	//height: 100%;
+	width: 200px;
+	-webkit-transition: .4s ease-out;
+			  transition: .4s ease-out;
+	opacity: .5;
 }
 
 .carousel > .wrap > ul > li:first-child {
@@ -158,11 +168,17 @@
 .carousel > .wrap > ul > li > img {
   display: block;
   height: 100%;
-  margin: auto;
+  //margin: auto;
   vertical-align: bottom;
   position: relative;
-  z-index: 1;
   -webkit-transition: 2s ease;
   		  transition: 2s ease;
+}
+
+.carousel > .wrap > ul > .active {
+	transform-origin: center center;
+	transform: scale(1.2);
+	z-index: 20;
+	opacity: 1;
 }
 
