@@ -3,16 +3,19 @@
 		<h2>Oscar's previous recommendations</h2>
 		<h3>Find out what Oscar has recommended to you</h3>
 	</div>
-	
-	<div class="carousel">
-		<div class="slides">
-			<div class="items">
-				<div class="item" style="background-image:url(http://	loremflickr.com/320/240?random=1)">ITEM 1</div>
-				<div class="item" style="background-image:url(http://	loremflickr.com/320/240?random=2)">ITEM 2</div>
-				<div class="item" style="background-image:url(http://	loremflickr.com/320/240?random=3)">ITEM 3</div>
-				<div class="item" style="background-image:url(http://	loremflickr.com/320/240?random=4)">ITEM 4</div>
-				<div class="item" style="background-image:url(http://	loremflickr.com/320/240?random=5)">ITEM 5</div>
-			</div>
-		</div>
-	</div>
+
+
+<div class="carousel right">
+  <div class="indicator"></div>
+  <div class="wrap">
+    <ul>
+      <li><img src="https://unsplash.it/200/300/?random"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=2"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=3"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=4"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=5"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=6"/></li>
+      <li><img src="https://unsplash.it/200/300/?random=7"/></li>
+    </ul>
+  </div>
 </div>
