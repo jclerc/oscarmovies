@@ -50,6 +50,26 @@ abstract class Injectable {
         return null;
     }
 
+    public function __isset($property) {
+
+        $container = $this->DIContainer;
+
+        if (!isset($container)) {
+            return false;
+        }
+
+        if ($property === 'di') {
+            return true;
+        }
+
+        if ($container->has($property)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
     public function another() {
         return $this->di->create(get_class($this));
     }

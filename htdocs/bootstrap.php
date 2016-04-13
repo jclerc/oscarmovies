@@ -36,6 +36,7 @@ define('PHP_ROOT', rtrim(dirname(__FILE__), '/') . '/');
 define('APP',      PHP_ROOT . 'app/');
 define('VENDOR',   PHP_ROOT . 'vendor/');
 define('BASE',          APP . 'base/');
+define('CACHE',         APP . 'cache/');
 define('CORE',          APP . 'core/');
 define('DI',            APP . 'di/');
 define('EXCEPTION',     APP . 'exception/');

@@ -41,6 +41,15 @@ class App {
             ]);
         });
 
+        // Twig
+        $loader = new Twig_Loader_Filesystem(TEMPLATE);
+        $twig = new Twig_Environment($loader, [
+            'cache' => CACHE . 'template',
+            'auto_reload' => true
+        ]);
+        
+        $container->share('Twig', $twig);
+
         $this->container = $container;
         
     }
