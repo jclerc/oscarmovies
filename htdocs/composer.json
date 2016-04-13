@@ -1,6 +1,7 @@
 {
   "require" : {
     "facebook/php-sdk-v4" : "~5.0",
-    "phpmailer/phpmailer": "~5.2"
+    "phpmailer/phpmailer": "~5.2",
+    "twig/twig": "~1.0"
   }
 }
