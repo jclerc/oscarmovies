@@ -16,6 +16,7 @@ body.with-nav {
     height: 100%;
     width: 80px;
     background: #322C40;
+    z-index: 20;
 }
 
 .nav .top-nav {
