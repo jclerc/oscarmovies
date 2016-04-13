@@ -117,6 +117,15 @@ class Request extends Service {
         return $this->post;
     }
 
+    public function isAjax() {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) and strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest' 
+                and $this->isPost();
+    }
+
+    public function getAjax() {
+        return $this->post;
+    }
+
     public function getQuery($key = null) {
         if (isset($key))
             return isset($_GET[$key]) ? $_GET[$key] : null;

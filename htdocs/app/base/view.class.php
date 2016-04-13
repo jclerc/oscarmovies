@@ -25,13 +25,13 @@ abstract class View extends Injectable {
     }
 
     protected function render(array $files) {
-        $css = $this->asset->getAllCSS();
-        $js  = $this->asset->getAllJS();
+        $data = $this->data;
+        $data['this'] = $this;
+        $data['css'] = $this->asset->getAllCSS();
+        $data['js']  = $this->asset->getAllJS();
         foreach ($files as $file) {
             $path = TEMPLATE . $file . '.html';
             if (is_file($path)) {
-                $data = $this->data;
-                $data['this'] = $this;
                 echo $this->twig->render($file . '.html', $data);
             } else {
                 throw new \InternalException('Missing template file: ' . $path);

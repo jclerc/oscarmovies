@@ -1,12 +1,42 @@
 
+/*
+ * --------------------------------
+ *           Main style
+ * --------------------------------
+ *
+ */
+
 html, body {
     height: 100%;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
     font-size: 14px;
 }
 
 body.with-nav {
     padding-left: 80px;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 400;
+    src: url('../../fonts/MontserratLight.eot');
+    src: url('../../fonts/MontserratLight.eot') format('embedded-opentype'),
+         url('../../fonts/MontserratLight.woff2') format('woff2'),
+         url('../../fonts/MontserratLight.woff') format('woff'),
+         url('../../fonts/MontserratLight.ttf') format('truetype'),
+         url('../../fonts/MontserratLight.svg#MontserratLight') format('svg');
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    src: url('../../fonts/MontserratRegular.eot');
+    src: url('../../fonts/MontserratRegular.eot') format('embedded-opentype'),
+         url('../../fonts/MontserratRegular.woff2') format('woff2'),
+         url('../../fonts/MontserratRegular.woff') format('woff'),
+         url('../../fonts/MontserratRegular.ttf') format('truetype'),
+         url('../../fonts/MontserratRegular.svg#MontserratRegular') format('svg');
 }
 
 /*
@@ -167,6 +197,36 @@ body.with-nav {
 
 /*
  * --------------------------------
+ *           Chat help
+ * --------------------------------
+ *
+ */
+
+.chat-help {
+    margin-top: 50px;
+}
+
+.chat-help .title {
+    font-size: 20px;
+}
+
+.chat-help .group {
+    padding: 15px 30px;
+    color: white;
+}
+
+.chat-help .label {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.chat-help .sample {
+    font-size: 16px;
+}
+
+/*
+ * --------------------------------
  *             Chat
  * --------------------------------
  *
@@ -174,10 +234,12 @@ body.with-nav {
 
 .chat {
     height: 100%;
+    padding-bottom: 40px;
 }
 
 .chat .messages {
     padding: 50px 100px;
+    padding-bottom: 0px;
     position: relative;
     overflow: scroll;
     height: 100%;
@@ -189,6 +251,7 @@ body.with-nav {
     min-height: 80px;
     position: relative;
     line-height: 80px;
+    margin: 10px 0;
 }
 
 .chat .message-oscar {
@@ -214,6 +277,12 @@ body.with-nav {
     color: white;
     vertical-align: middle;
     border-radius: 5px;
+}
+
+.chat .message .content .gif {
+    max-width: 100%;
+    height: auto;
+    display: block;
 }
 
 .chat .message-oscar .avatar {
@@ -259,6 +328,11 @@ body.with-nav {
 .chat .message-user .avatar img {
     width: 100%;
     height: 100%;
+}
+
+.chat .message-user .bubble {
+    float: right;
+    line-height: 80px;
 }
 
 .chat .message-user .content {

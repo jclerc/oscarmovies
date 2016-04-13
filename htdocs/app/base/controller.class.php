@@ -20,6 +20,24 @@ abstract class Controller extends Injectable {
      */
     public function view($command, $other = null) {
 
+        // If request is ajax, we don't render any templates
+        // For an ajax request, method is: view($data, $isSuccess);
+        if ($this->request->isAjax()) {
+            header('Content-Type: application/json; charset=utf-8');
+            if (is_array($command)) {
+                echo json_encode([
+                    'success' => is_bool($other) ? $other : true,
+                    'data' => $command
+                ]);
+            } else {
+                echo json_encode([
+                    'success' => false,
+                    'data' => null
+                ]);
+            }
+            exit;
+        }
+
         if (isset($other)) {
             $resource = $command;
             $command = $other;

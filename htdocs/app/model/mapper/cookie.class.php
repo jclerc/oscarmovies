@@ -8,15 +8,11 @@ use Model\Base\Mapper;
  */
 class Cookie extends Mapper {
 
-    const EXPIRE_1_DAY = 86400;
-    const EXPIRE_1_WEEK = 86400 * 7;
-    const EXPIRE_1_MONTH = 86400 * 30;
-
     public function get($key) {
         return isset($_COOKIE[$key]) ? $_COOKIE[$key] : null;
     }
 
-    public function set($key, $value, $expire = self::EXPIRE_1_WEEK) {
+    public function set($key, $value, $expire = self::EXPIRE_WEEK) {
         setcookie($key, $value, time() + $expire, '/');
     }
 
