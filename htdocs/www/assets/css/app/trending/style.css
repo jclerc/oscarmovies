@@ -26,14 +26,6 @@
 	margin: 0 auto;
 }
 
-/* mosaics positions */
-.mosaic > .wrap > .primary-mosaic{
-	position: relative;
-	float: left;
-	width: 33%;
-	height: 100%;
-	overflow: hidden;
-}
 
 /*big poster*/
 .mosaic > .wrap > .primary-mosaic > .featuring{

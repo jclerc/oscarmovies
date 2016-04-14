@@ -3,7 +3,7 @@
     "debug": true,
 
     "database": {
-        "use": "MySQL",
+        "use": "",
         "available": {
             "MySQL": ["localhost", "oscar", "root", "root"],
             "SQLite": ["../database.sqlite"]
