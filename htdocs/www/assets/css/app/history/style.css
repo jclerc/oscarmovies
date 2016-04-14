@@ -49,18 +49,22 @@
   height: 310px;
   position: absolute;
   margin-left: 40%;
+  font-size: 0;
 }
 
 .carousel > .wrap > ul > li {
 	position: relative;
+  /*margin-left: -5px;*/
   z-index: 19;
 	display: inline-block;
 	vertical-align: middle;
 	height: 100%;
-	width: 200px;
+	width: 210px;
 	-webkit-transition: .4s ease-out;
 			  transition: .4s ease-out;
-	opacity: .5;
+	opacity: .2;
+  background-size: cover;
+  font-size: 16px;
 }
 
 .carousel > .wrap > ul > li:first-child {

@@ -24,7 +24,6 @@
 	height: 100%;
 	width: 90%;
 	margin: 0 auto;
-	background-color: white;
 }
 
 /* mosaics positions */
@@ -58,6 +57,10 @@
 
 .mosaic > .wrap > .secondary-mosaic > .movie-unit{
 	display: inline-block;
+	position: relative;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
 	/*height: 330px;
 	width: 242px;*/
 	width: 32%; 
@@ -68,12 +71,23 @@
 
 /* description and description elements */
 .mosaic > .wrap .movie-description {
-	width: 60%;
-	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
   	text-transform: uppercase;
   	font-weight: 400;
-  	font-size: 1.2em;
-  	margin: auto;
+  	font-size: 1.3em;
+    padding: 20% 1.2vw 20px 1.1vw;
+  	opacity: 0;
+  	transition: opacity .3s;
+  	background-color: rgba(0, 0, 0, 0.54);
+}
+
+.mosaic > .wrap > .primary-mosaic .movie-description {
+	padding-top: 18vh;
+	font-size: 1.8em;
 }
 
 /* DESCRIPTION */
@@ -88,43 +102,25 @@
 
 .mosaic > .wrap .movie-description > .movie-title{
   letter-spacing: 1px;
-  padding: 50% 0 3px 0;
+  font-weight: 600;
+  padding: 8vh 0 2vh 0;
   font-size: 1em;
 }
+
 
 .mosaic > .wrap .movie-description > .movie-vote{
   letter-spacing: 1px;
   font-size: .7em;
-  padding-bottom: 6px;
-}
-
-
-/* HOVER effect */
-.mosaic > .wrap > .secondary-mosaic *:hover > .overlay{
-    width:100%;
-    height:100%;
-    position:absolute;
-    background-color:#000;
-    opacity:0.7;
-}
-
-.mosaic > .wrap > .primary-mosaic *:hover > .overlay{
-    width:100%;
-    height:100%;
-    position:absolute;
-    background-color:#000;
-    opacity:0.7;
+  padding-bottom: 2vh;
 }
 
 
 /* activate description */
-.mosaic > .wrap > .primary-mosaic *:hover > .movie-description{
-	display: block;
-	padding-top: 50%;
+.mosaic > .wrap > .primary-mosaic .featuring:hover > .movie-description{
+	opacity: 1;
 }
 
-.mosaic > .wrap > .secondary-mosaic *:hover > .movie-description{
-	display: block;
-	padding-top: 20%;
+.mosaic > .wrap > .secondary-mosaic .movie-unit:hover > .movie-description{
+	opacity: 1;
 }
 

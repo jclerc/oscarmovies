@@ -9,7 +9,6 @@
   <div class="wrap">
     <div class="primary-mosaic">
       <div class="featuring" style="background-image: url('http://image.tmdb.org/t/p/w500{{featuring.poster_path }}')">
-        <div class="overlay"></div>
          <div class="movie-description">
            <h5 class="movie-title">{{ featuring.title }}</h5>
            <h6 class="movie-vote">{{ featuring.vote_average }} / 10</h6>
@@ -26,7 +25,6 @@
     <div class="secondary-mosaic">
      		{% for movie in movies %}
      		<div class="movie-unit" style="background-image: url('http://image.tmdb.org/t/p/w342{{ movie.poster_path }}')">
-          <div class="overlay"></div>
           <div class="movie-description">
              <h5 class="movie-title">{{ movie.title }}</h5>
              <h6 class="movie-vote">{{ movie.vote_average }} / 10</h6>
