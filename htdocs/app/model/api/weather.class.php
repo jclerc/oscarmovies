@@ -22,7 +22,7 @@ class Weather extends Api {
     ];
 
     const WEATHER_PREFIX = [
-        '01' => 'beautiful',
+        '01' => 'sunny',
         '02' => 'cloudy',
         '03' => 'cloudy',
         '04' => 'cloudy',
