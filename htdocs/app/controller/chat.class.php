@@ -63,30 +63,38 @@ class Chat extends Controller {
 
         } else {
 
+            // Get what we have
             $post = $request->getAjax();
             $message = $post['message'];
             $id = $this->session->get('converse.id');
             $entities = $this->session->get('converse.entities');
+            if (!is_array($entities)) $entities = [];
 
+            // Prepare response
             $data = [
                 'message' => null,
                 'gif' => null,
                 'movie' => null,
-                'debug' => null,
             ];
 
+            // Call api
             $talk = $this->api->wit->talk($id, $message);
             if (DEBUG) $data['debug'] = $talk;
 
-            $response = $talk['msg'];
-            $entities = array_merge(is_array($entities) ? $entities : [], $talk['entities']);
-            $this->session->set('converse.entities', $entities);
+            // Process entities
+            foreach ($talk['entities'] as $entity) {
+                # code...
+            }
 
             $data['entities'] = $entities;
+            $this->session->set('converse.entities', $entities);
+
+            // Chat response
+            $response = $talk['msg'];
 
             if (empty($response)) {
                 if ($talk['success']) {
-                    // We have entities (= keywords to search), but not specific response
+                    // Bot undestood, but not specific response
                     $response = $this->getRandomSuccess();
                 } else {
                     $response = $this->getRandomError();
@@ -94,67 +102,17 @@ class Chat extends Controller {
                 }
             }
 
-            if (is_string($response)) {
-                $response = str_replace([
-                    ';-)',
-                    ';)',
-                    ':-(',
-                    ':(',
-                ], [
-                    '😉',
-                    '😉',
-                    '😞',
-                    '😞',
-                ], $response);
+            $response = str_replace([';-)', ';)', ':-(', ':('], ['😉', '😉', '😞', '😞'], $response);
+
+            if (stripos($message, 'gif') === 0) {
+                $gif = substr($message, 3);
+                $response = '';
+                $data['gif'] = $this->api->giphy->get(trim($gif) ?: 'happy');
             }
 
             $data['message'] = $response;
 
-
-            // $data['message'] = call_user_func(function () {
-            //     $msg = [
-            //         'Please wait..',
-            //         'I am Oscar ! 👻',
-            //         'What do you want ?',
-            //         'Ok dude.',
-            //         'You are ugly.',
-            //         'I love potatoes !',
-            //         'STOP TALKING TO ME.',
-            //     ];
-            //     return $msg[array_rand($msg)];
-            // });
-
-            // if (stripos($message, 'gif') > -1) {
-            //     if (stripos($message, 'gif ') === 0) {
-            //         $data['gif'] = $this->api->giphy->get(substr($message, 4));
-            //     } else {
-            //         $data['gif'] = $this->api->giphy->get('happy');
-            //     }
-            // } else if (stripos($message, 'cat') > -1) {
-            //     $data['gif'] = $this->api->giphy->get('cat');
-            //     $data['message'] = 'I HEARD YOU SAY CAT ?';
-            // } else if (stripos($message, 'i want to see a ') === 0) {
-            //     $genre = substr($message, strlen('i want to see a '));
-            //     $movies = $this->api->movies->findByGenre($genre);
-            //     if (isset($movies->results) and count($movies->results) > 0) {
-
-            //         $movie = $movies->results[ rand(0, count($movies->results) - 1) ];
-            //         $data['message'] = 'What about ' . $movie->title . ' ?';
-
-            //         $availability = $this->api->availability->get($movie->title);
-            //         if (!empty($availability)) {
-            //             $services = [];
-            //             foreach ($availability as $key => $value) {
-            //                 $services[] = ucfirst(substr($key, 0, strpos($key, '_')));
-            //             }
-            //             $data['message'] .= ' You can watch it on ' . implode(', ', $services) . '.';
-            //         }
-
-            //     } else {
-            //         $data['message'] = 'I DONT KNOW WHAT KIND OF GENRE "' . $genre . '" IS';
-            //     }
-            // }
-
+            // And pass data to AJAX
             $this->view($data);
 
         }

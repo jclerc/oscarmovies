@@ -29,7 +29,8 @@ class Wit extends Api {
         if (isset($json->entities)) {
             foreach ($json->entities as $name => $entityArray) {
                 $data['success'] = true;
-                foreach ($entityArray as $entity) {
+                if (count($entityArray) > 0) {
+                    $entity = reset($entityArray);
                     if (isset($entity->type) and isset($entity->value) and $entity->type === 'value') {
                         $data['entities'][$name][] = $entity->value;
                     }
