@@ -78,7 +78,7 @@ Carousel.prototype.go_to = function( index )
     // Animate
     this.$.slides_container.animate( {
         left : - index * this.width
-    } );
+    }, 200 );
 
     // Save new index
     this.index = index;
