@@ -11,18 +11,60 @@
 	background: #1B1B24;
 	color: white;
 	height: 100%;
-	perspective: 2000px;
+	width: 100%;
 }
 
+.mosaic > .wrap {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	padding: 2%;
+	text-align: center;
 
+}
 
-.mosaic > .wrap > ul > li {
+.mosaic > .wrap > ul > li,ul {
 	display: inline-block;
+	position: relative;
 }
 
-.carousel > .wrap > ul > li:first-child {
+
+.mosaic > .wrap > ul > ul{
+	position: relative;
+	width: 50vw;
+	height: 100vh;
 }
 
-.carousel > .wrap > ul > li > img:hover {
-	z-index: -1;
+.mosaic > .wrap > ul{
+	position: relative;
+	width: 100vw;
+	height: 78vh;
 }
+
+.mosaic > .wrap > ul > ul > li {
+	display: inline-block;
+	/*height: 330px;
+	width: 242px;*/
+	width: 30%; 
+	height: 35%;
+	background: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg');
+	background-position: center center;
+}
+
+
+/* first image */
+.mosaic > .wrap > ul > li:first-child {
+/*	height: 680px;
+	width: 500px;*/
+	height: 90%;
+	width: 40%;
+	background-size: cover;
+	border: solid 1px white;
+	background-position: center center;
+
+}
+
+/* hover effect */
+.mosaic > .wrap li:hover {
+	opacity: .2;
+	}
