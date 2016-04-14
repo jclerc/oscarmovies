@@ -34,13 +34,28 @@ class Weather extends Api {
     ];
 
     public function getCurrentState(array $location = []) {
+        if (empty($location)) {
+            $ip = $this->api->ip->getCurrent();
+            $location = [
+                'lat' => $ip->lat,
+                'lon' => $ip->lon,
+            ];
+        }
+
         $current = $this->getCurrent($location);
         $prefix = substr($current->icon, 0, 2);
         $str = '';
         if (array_key_exists($prefix, self::WEATHER_PREFIX)) {
             $str .= self::WEATHER_PREFIX[$prefix] . ' ';
         }
+
+        $defaultTimezone = date_default_timezone_get();
+        $timezone = $ip->timezone ?: $defaultTimezone;
+        
+        date_default_timezone_set($timezone);
         $str .= $this->getDayPeriod();
+        date_default_timezone_set($defaultTimezone);
+
         return $str;
     }
 
