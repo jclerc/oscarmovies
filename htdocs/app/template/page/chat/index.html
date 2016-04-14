@@ -4,10 +4,18 @@
     <div class="left-content">
         <div class="chat">
             <div class="messages">
-                <div class="message message-oscar">
+                <div class="converse">
+                    <div class="message message-oscar">
+                        <div class="avatar"><img src="/assets/img/ghost/discussion.svg" alt=""></div>
+                        <div class="bubble">
+                            <div class="content">Hi, I'm Oscar !<br> How can I help you in this {{ weather }} ?</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="message message-oscar message-loading" style="display: none;">
                     <div class="avatar"><img src="/assets/img/ghost/discussion.svg" alt=""></div>
                     <div class="bubble">
-                        <div class="content">Hi, I'm Oscar !<br> How can I help you in this {{ weather }} ?</div>
+                        <div class="content">LOADING BUDDY</div>
                     </div>
                 </div>
             </div>

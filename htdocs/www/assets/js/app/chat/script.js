@@ -4,6 +4,8 @@
     var $input = $('.chat-input');
     var $template = $('.template');
     var $messages = $('.messages');
+    var $converse = $('.converse');
+    var $messageLoading = $('.message-loading');
 
     var template = {
         message: {
@@ -15,13 +17,18 @@
     var addReply = function (who, message, gif) {
         var $tpl = template.message[who];
         if ($tpl) {
+            $messageLoading.hide();
             $content = $tpl.clone().find('.content').text(message);
             if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', function (e) {
-                $messages.scrollTop($messages.get(0).scrollHeight);
+                gotoBottom();
             }));
-            $content.end().appendTo($messages);
-            $messages.scrollTop($messages.get(0).scrollHeight);
+            $content.end().appendTo($converse);
+            gotoBottom();
         }
+    };
+    
+    var gotoBottom = function () {
+        $messages.scrollTop($messages.get(0).scrollHeight);
     };
 
     var reply = {
@@ -35,6 +42,7 @@
         $input.val('');
         if (message.length) {
             reply.user(message);
+            var replied = false;
             $.ajax({
                 url: location.href,
                 data: {
@@ -43,11 +51,24 @@
                 'method': $(this).attr('method'),
                 'dataType': 'JSON',
                 success: function (json) {
+                    replied = true;
                     if (json && json.success && json.data && json.data.message) {
                         reply.oscar(json.data.message, json.data.gif);
+                    } else {
+                        reply.oscar('Sorry, something went wrong..');
                     }
+                },
+                error: function () {
+                    replied = true;
+                    reply.oscar('Sorry, something went wrong..');
                 }
             });
+            setTimeout(function () {
+                if (replied === false) {
+                    $messageLoading.show();
+                    gotoBottom();
+                }
+            }, 1);
         }
     });
 
