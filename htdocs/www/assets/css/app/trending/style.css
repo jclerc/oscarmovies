@@ -13,3 +13,16 @@
 	height: 100%;
 	perspective: 2000px;
 }
+
+
+
+.mosaic > .wrap > ul > li {
+	display: inline-block;
+}
+
+.carousel > .wrap > ul > li:first-child {
+}
+
+.carousel > .wrap > ul > li > img:hover {
+	z-index: -1;
+}
