@@ -1,0 +1,73 @@
+/*
+ * --------------------------------
+ *           Homepage
+ * --------------------------------
+ *
+ */
+body{
+	background-image: url('/assets/img/pattern/white-movie-pattern.png');	color: white;
+}
+
+
+.home-container{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	transform: translate(-50%,-50%);
+	text-align: center;
+}
+
+.home-container > .oscar{
+	position: relative;
+	margin: 0 auto;
+	width: 220px;
+	height: 220px;
+	background-image: url('/assets/img/ghost/logo.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+}
+
+.home-container > h2{
+	position: relative;
+	margin: 20px;
+	text-align: center;
+	padding: 5%;
+}
+
+.home-container > .login-fb{
+	position: relative;
+	color: #322C40;
+	font-weight: 600;
+	letter-spacing: .3vw;
+	text-decoration: none;
+	background-color: #eee;
+	padding: 16px 20px 16px 55px;
+	border-radius: 2px;
+}
+
+.home-container > .login-fb > .logo-fb{
+	width: 30px;
+	position: absolute;
+	left: 10px;
+	top: 9px;
+}
+
+
+.home-container > h3{
+	position: relative;
+	margin: 20px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+.mention{
+	color: #eee;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+	text-align: right;
+	transform-origin: 100% 100%;
+	transform: scale(.6);
+}
