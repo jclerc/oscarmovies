@@ -76,10 +76,24 @@
 }
 
 .mosaic > .wrap > .primary-mosaic .movie-description {
-	padding: 18vh 1.2vw 20px 1.1vw;
+  position: absolute;
+  width: 31.9%;
+  left: 2.5%;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 1.3em;
+  padding: 20% 1.2vw 20px 1.1vw;
+	opacity: 0;
+	transition: opacity .3s;
+	background-color: rgba(0, 0, 0, 0.54);
+
+  /*padding: 18vh 1.2vw 20px 1.1vw;
   width: 33.5%;
   left: 2.5%;
-	font-size: 1.8em;
+	font-size: 1.8em;*/
 
 }
 
