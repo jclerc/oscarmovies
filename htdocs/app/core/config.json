@@ -29,7 +29,8 @@
             "giphy":        "Model\\Api\\Giphy",
             "ip":           "Model\\Api\\Ip",
             "movies":       "Model\\Api\\Movies",
-            "weather":      "Model\\Api\\Weather"
+            "weather":      "Model\\Api\\Weather",
+            "wit":          "Model\\Api\\Wit"
         }
     }
 

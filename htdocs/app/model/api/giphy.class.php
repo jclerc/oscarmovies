@@ -9,7 +9,7 @@ use Model\Mapper\Cache;
  */
 class Giphy extends Api {
 
-    const API_SEARCH = 'http://api.giphy.com/v1/gifs/search?q={query}&limit=10&api_key=dc6zaTOxFJmzC';
+    const API_SEARCH = 'http://api.giphy.com/v1/gifs/search?q={query}&limit=25&api_key=dc6zaTOxFJmzC';
 
     public function get($query) {
         $json = $this->callJson('search', ['query' => urlencode($query)], Cache::EXPIRE_DAY);

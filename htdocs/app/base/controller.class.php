@@ -28,12 +28,12 @@ abstract class Controller extends Injectable {
                 echo json_encode([
                     'success' => is_bool($other) ? $other : true,
                     'data' => $command
-                ]);
+                ], JSON_PRETTY_PRINT);
             } else {
                 echo json_encode([
                     'success' => false,
                     'data' => null
-                ]);
+                ], JSON_PRETTY_PRINT);
             }
             exit;
         }
