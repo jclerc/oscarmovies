@@ -5,9 +5,13 @@
  *
  */
 body{
-	background-image: url('/assets/img/pattern/white-movie-pattern.png');	color: white;
+	background-image: url('/assets/img/pattern/white-movie-pattern.png');
+	color: white;
 }
 
+a {
+	text-decoration: none;
+}
 
 .home-container{
 	position: absolute;
@@ -40,11 +44,12 @@ body{
 	position: relative;
 	color: #322C40;
 	font-weight: 600;
+	font-size: 1em;
 	letter-spacing: .3vw;
 	text-decoration: none;
 	background-color: #eee;
 	padding: 16px 20px 16px 55px;
-	border-radius: 2px;
+	border-radius: 5px;
 }
 
 .home-container > .login-fb > .logo-fb{
@@ -60,6 +65,15 @@ body{
 	margin: 20px;
 	text-align: center;
 	padding-top: 15px;
+	font-size: 0.7em;
+	opacity: 0.8;
+	text-transform: none;
+	transition: 0.3s ease all;
+}
+
+.home-container > h3:hover {
+	opacity: 1;
+	transition: 0.3s ease all;
 }
 
 .mention{
