@@ -18,18 +18,18 @@ class Auth extends Service {
         return $this->getUser()->exists();
     }
 
-    public function getLoginUrl() {
+    public function getLoginUrl($redirect = null) {
         $helper = $this->facebook->getRedirectLoginHelper();
 
         // Optional permissions
         $permissions = ['email'];
 
-        $redirect = urlencode($this->request->getRouteUrl());
+        $redirect = isset($redirect) ? $redirect : urlencode($this->request->getRouteUrl());
         return $helper->getLoginUrl($this->request->getBaseUrl() . 'facebook/connect/?redirect=' . $redirect, $permissions);
     }
 
-    public function getLogoutUrl() {
-        $redirect = urlencode($this->request->getRouteUrl());
+    public function getLogoutUrl($redirect = null) {
+        $redirect = isset($redirect) ? $redirect : urlencode($this->request->getRouteUrl());
         return $this->request->getBaseUrl() . 'facebook/logout/?redirect=' . $redirect;
     }
 
