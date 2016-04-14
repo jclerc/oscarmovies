@@ -7,7 +7,7 @@
  *
  */
 
- .trending {
+ .trending{
 	background: #1B1B24;
 	color: white;
 	height: 100%;
@@ -15,61 +15,116 @@
 	overflow: hidden;
 }
 
-/*.mosaic > .wrap {
+.mosaic {
 	position: relative;
 	width: 100%;
+	height: 75%;
+}
+.mosaic > .wrap {
 	height: 100%;
-	padding: 2%;
-	text-align: center;
+	width: 90%;
+	margin: 0 auto;
+	background-color: white;
+}
 
-}*/
+/* mosaics positions */
+.mosaic > .wrap > .primary-mosaic{
+	position: relative;
+	float: left;
+	width: 33%;
+	height: 100%;
+	overflow: hidden;
+}
 
-.mosaic > .wrap > ul > li,ul {
+/*big poster*/
+.mosaic > .wrap > .primary-mosaic > .featuring{
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
 	display: inline-block;
+
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+
+.mosaic > .wrap > .secondary-mosaic{
 	position: relative;
+	float: right;
+	width: 66%;
+	height: 100%;
+	overflow: hidden;
 }
 
-.mosaic > .wrap ul {
-	margin: 1%;
-}
-
-
-.mosaic > .wrap > ul > ul{
-	position: relative;
-	width: 50vw;
-	height: 100vh;
-}
-
-.mosaic > .wrap > ul{
-	position: relative;
-	width: 100vw;
-	height: 78vh;
-}
-
-.mosaic > .wrap > ul > ul > li {
+.mosaic > .wrap > .secondary-mosaic > .movie-unit{
 	display: inline-block;
 	/*height: 330px;
 	width: 242px;*/
-	width: 30%; 
-	height: 35%;
-	background: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg');
-	background-position: center center;
+	width: 32%; 
+	height: 50%;
+	margin: 0;
 }
 
 
-/* first image */
-.mosaic > .wrap > ul > li:first-child {
-/*	height: 680px;
-	width: 500px;*/
-	height: 90%;
-	width: 40%;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: top center;
-
+/* description and description elements */
+.mosaic > .wrap .movie-description {
+	width: 60%;
+	display: none;
+  	text-transform: uppercase;
+  	font-weight: 400;
+  	font-size: 1.2em;
+  	margin: auto;
 }
 
-/* hover effect */
-.mosaic > .wrap li:hover {
-	opacity: .2;
-	}
+/* DESCRIPTION */
+/* style tags */
+.mosaic > .wrap .movie-description > .tags > div{
+  font-size: .6em;
+  display: inline-block;
+  border: .1em solid;
+  border-radius: 20px;
+  padding: 8px;
+}
+
+.mosaic > .wrap .movie-description > .movie-title{
+  letter-spacing: 1px;
+  padding: 50% 0 3px 0;
+  font-size: 1em;
+}
+
+.mosaic > .wrap .movie-description > .movie-vote{
+  letter-spacing: 1px;
+  font-size: .7em;
+  padding-bottom: 6px;
+}
+
+
+/* HOVER effect */
+.mosaic > .wrap > .secondary-mosaic *:hover > .overlay{
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:#000;
+    opacity:0.7;
+}
+
+.mosaic > .wrap > .primary-mosaic *:hover > .overlay{
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:#000;
+    opacity:0.7;
+}
+
+
+/* activate description */
+.mosaic > .wrap > .primary-mosaic *:hover > .movie-description{
+	display: block;
+	padding-top: 50%;
+}
+
+.mosaic > .wrap > .secondary-mosaic *:hover > .movie-description{
+	display: block;
+	padding-top: 20%;
+}
+
