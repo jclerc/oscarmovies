@@ -170,18 +170,42 @@
 }
 
 .chat .message-oscar .bubble .content .bubbles:first-child {
+    -webkit-animation: bubbles 1.2s infinite;
+    -moz-animation: bubbles 1.2s infinite;
+    -o-animation: bubbles 1.2s infinite;
     animation: bubbles 1.2s infinite;
 }
 
 .chat .message-oscar .bubble .content .bubbles:nth-child(2) {
+    -webkit-animation: bubbles 1.2s 0.2s infinite;
+    -moz-animation: bubbles 1.2s 0.2s infinite;
+    -o-animation: bubbles 1.2s 0.2s infinite;
     animation: bubbles 1.2s 0.2s infinite;
 }
 
 .chat .message-oscar .bubble .content .bubbles:last-child {
+    -webkit-animation: bubbles 1.2s 0.4s infinite;
+    -moz-animation: bubbles 1.2s 0.4s infinite;
+    -o-animation: bubbles 1.2s 0.4s infinite;
     animation: bubbles 1.2s 0.4s infinite;
 }
 
 @keyframes bubbles {
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-10px);}
+    100% {transform: translateY(0px);}
+}
+@-webkit-keyframes bubbles {
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-10px);}
+    100% {transform: translateY(0px);}
+}
+@-moz-keyframes bubbles {
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-10px);}
+    100% {transform: translateY(0px);}
+}
+@-o-keyframes bubbles {
     0% {transform: translateY(0px);}
     50% {transform: translateY(-10px);}
     100% {transform: translateY(0px);}
