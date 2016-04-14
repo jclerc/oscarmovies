@@ -14,11 +14,11 @@ class Weather extends Api {
     const HOURS_IN_SECONDS = 3600;
 
     const DAY_PERIODS = [
-        'night'     => 7,  // 00h - 07h
-        'morning'   => 12, // 07h - 12h
-        'afternoon' => 18, // 12h - 18h
-        'evening'   => 21, // 18h - 21h
-        'night'     => 24, // 21h - 00h
+        7  => 'night',  // 00h - 07h
+        12 => 'morning', // 07h - 12h
+        18 => 'afternoon', // 12h - 18h
+        21 => 'evening', // 18h - 21h
+        24 => 'night', // 21h - 00h
     ];
 
     const WEATHER_PREFIX = [
@@ -64,8 +64,7 @@ class Weather extends Api {
 
     public function getDayPeriod() {
         $seconds = time() - strtotime('today');
-        // var_dump($seconds); exit;
-        foreach (self::DAY_PERIODS as $name => $period) {
+        foreach (self::DAY_PERIODS as $period => $name) {
             if ($seconds < $period * self::HOURS_IN_SECONDS) {
                 return $name;
             }
