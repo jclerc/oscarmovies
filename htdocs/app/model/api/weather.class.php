@@ -64,7 +64,7 @@ class Weather extends Api {
 
     public function getDayPeriod() {
         $seconds = time() - strtotime('today');
-        var_dump($seconds); exit;
+        // var_dump($seconds); exit;
         foreach (self::DAY_PERIODS as $name => $period) {
             if ($seconds < $period * self::HOURS_IN_SECONDS) {
                 return $name;
