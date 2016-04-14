@@ -50,6 +50,11 @@ class App {
         
         $container->share('Twig', $twig);
 
+        // Delete expired cache file
+        if ($cache = $container->get('Cache')) {
+            $cache->clearExpired();
+        }
+
         $this->container = $container;
         
     }

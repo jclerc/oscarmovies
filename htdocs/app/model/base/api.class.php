@@ -8,11 +8,16 @@ use Base\Model;
  */
 abstract class Api extends Model {
 
-    public function callJson($api, array $params = []) {
-        return json_decode($this->callApi($api, $params));
+    public function callJson($api, array $params = [], $expiration) {
+        return json_decode($this->callApi($api, $params, $expiration));
     }
 
-    public function callApi($api, array $params = []) {
+    public function callApi($api, array $params = [], $expiration) {
+
+        if ($cache = $this->cache->get([$api, $params])) {
+            return $cache;
+        }
+
         $url = constant(get_called_class() . '::API_' . str_replace('.', '_', strtoupper($api)));
 
         foreach ($params as $key => $value) {
@@ -26,6 +31,10 @@ abstract class Api extends Model {
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);
         $result = curl_exec($ch);
         curl_close($ch);
+
+        if (!empty($result)) {
+            $this->cache->set([$api, $params], $result, $expiration);
+        }
 
         return $result;
     }

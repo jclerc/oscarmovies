@@ -1,17 +1,15 @@
 BIENVENUE<br>
 
-<?= $this->flash->build() ?>
+{{ this.flash.build()|raw }}
 
-<?php if (isset($loginUrl)): ?>
-    <a href="<?= e($loginUrl) ?>">Log in with Facebook!</a>
-<?php endif; ?>
+{% if loginUrl is defined %}
+    <a href="{{ loginUrl }}">Log in with Facebook!</a>
+{% endif %}
 
-<?php if (isset($logoutUrl)): ?>
-    <a href="<?= e($logoutUrl) ?>">Log out!</a>
-<?php endif; ?>
+{% if logoutUrl is defined %}
+    <a href="{{ logoutUrl }}">Log out!</a>
+{% endif %}
 
-<h2>NOM: <?= $username ?></h2>
+<h2>NOM: {{ username }}</h2>
 
-<h4>METEO: <?= $weather->main ?> <small>(<?= $weather->description ?>)</small></h4>
-
-<b>Django Unchained</b>: <?= implode(', ', array_keys((array) $this->api->availability->get('Django Unchained'))) ?>
+<h4>METEO: {{ weather }}</h4>

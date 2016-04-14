@@ -26,7 +26,7 @@ class Test extends Controller {
             $this->set('loginUrl', $this->auth->getLoginUrl());
         }
 
-        $this->set('weather', $this->api->weather->getCurrent());
+        $this->set('weather', $this->api->weather->getCurrentState());
 
     }
 

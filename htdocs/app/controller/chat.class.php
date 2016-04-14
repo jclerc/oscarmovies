@@ -29,6 +29,8 @@ class Chat extends Controller {
 
         }
 
+        $this->set('weather', $this->api->weather->getCurrentState());
+
     }
 
 }
