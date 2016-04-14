@@ -1,0 +1,15 @@
+
+
+/*
+ * --------------------------------
+ *           Trending
+ * --------------------------------
+ *
+ */
+
+ .trending {
+	background: #1B1B24;
+	color: white;
+	height: 100%;
+	perspective: 2000px;
+}
