@@ -11,6 +11,7 @@
 	color: white;
 	height: 100%;
 	perspective: 2000px;
+	overflow: hidden;
 }
 
 .carousel {
