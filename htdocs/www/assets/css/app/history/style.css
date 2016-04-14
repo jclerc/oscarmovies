@@ -122,8 +122,8 @@
 	  z-index: 19;
 		display: inline-block;
 		vertical-align: middle;
-		height: 100%;
-		width: 210px;
+		height: 70%;
+		width: 240px;
 		-webkit-transition: .3s ease-out;
 				    transition: .3s ease-out;
 		opacity: .2;
