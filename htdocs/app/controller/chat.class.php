@@ -45,10 +45,21 @@ class Chat extends Controller {
                 $genre = substr($message, strlen('i want to see a '));
                 $movies = $this->api->movies->findByGenre($genre);
                 if (isset($movies->results) and count($movies->results) > 0) {
+
                     $movie = $movies->results[ rand(0, count($movies->results) - 1) ];
                     $data['message'] = 'What about ' . $movie->title . ' ?';
+
+                    $availability = $this->api->availability->get($movie->title);
+                    if (!empty($availability)) {
+                        $services = [];
+                        foreach ($availability as $key => $value) {
+                            $services[] = ucfirst(substr($key, 0, strpos($key, '_')));
+                        }
+                        $data['message'] .= ' You can watch it on ' . implode(', ', $services) . '.';
+                    }
+
                 } else {
-                    $data['message'] = 'I DONT KNOW WHAT GENRE IS ' . $genre;
+                    $data['message'] = 'I DONT KNOW WHAT KIND OF GENRE "' . $genre . '" IS';
                 }
             }
 

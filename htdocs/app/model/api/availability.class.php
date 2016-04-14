@@ -16,7 +16,7 @@ class Availability extends Api {
         $json = $this->callJson('find.film', ['name' => urlencode($filmName)], Cache::EXPIRE_WEEK);
         if (!empty($json) and count($json) > 0 and !empty($json[0]) and !empty($json[0]->_id)) {
             $id = $json[0]->_id;
-            $rental = $this->callJson('rental.availability', ['id' => $id]);
+            $rental = $this->callJson('rental.availability', ['id' => $id], Cache::EXPIRE_WEEK);
             return empty($rental) ? null : $rental;
         }
         return null;

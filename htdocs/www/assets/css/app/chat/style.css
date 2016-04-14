@@ -52,7 +52,6 @@
 
 .chat .messages .message {
     width: 100%;
-    max-width: 500px;
     min-height: 80px;
     position: relative;
     line-height: 80px;
@@ -87,6 +86,7 @@
     color: white;
     vertical-align: middle;
     border-radius: 5px;
+    max-width: 500px;
 }
 
 .chat .message .content .gif {
