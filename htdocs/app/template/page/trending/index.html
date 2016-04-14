@@ -13,7 +13,7 @@
            <h5 class="movie-title">{{ featuring.title }}</h5>
            <h6 class="movie-vote">{{ featuring.vote_average }} / 10</h6>
            <div class="tags">
-             <div class="genre-tag">{{ featuring.genres[0].name }}</div>
+             <div class="genre-tag">{{ featuring.genre_name }}</div>
              <div class="year-tag">{{ featuring.release_date|slice(0,4) }}</div>
              <div class="country-tag">{{ featuring.original_language }}</div>
            </div>
@@ -29,7 +29,7 @@
              <h5 class="movie-title">{{ movie.title }}</h5>
              <h6 class="movie-vote">{{ movie.vote_average }} / 10</h6>
              <div class="tags">
-               <div class="genre-tag">{{ movie.genres[0].name }}</div>
+               <div class="genre-tag">{{ movie.genre_name }}</div>
                <div class="year-tag">{{ movie.release_date|slice(0,4) }}</div>
                <div class="country-tag">{{ movie.original_language }}</div>
               </div>

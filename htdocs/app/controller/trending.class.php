@@ -14,6 +14,11 @@ class Trending extends Controller {
 
         $movies = $this->api->movies->trending();
 
+        foreach ($movies as $movie) {
+            $id = reset($movie->genre_ids);
+            $movie->genre_name = $this->api->movies->getGenreName($id);
+        }
+
         $this->set('featuring', $movies[0]);
         $this->set('movies', [
             $movies[1],

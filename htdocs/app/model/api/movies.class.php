@@ -25,7 +25,19 @@ class Movies extends Api {
 
     private function query($query) {
         $response = $this->callJson('query', ['query' => $query], Cache::EXPIRE_WEEK);
-        return isset($response->results) ? $response->results : null;
+        return isset($response->results) ? $response->results : $response;
+    }
+
+    public function getGenreName($id) {
+        $list = $this->query('genre/movie/list');
+        if (isset($list->genres)) {
+            foreach ($list->genres as $g) {
+                if (intval($g->id) === intval($id)) {
+                    return $g->name;
+                }
+            }
+        }
+        return null;
     }
 
     private function getGenreId($genre) {
