@@ -59,6 +59,12 @@
     margin: 10px 0;
 }
 
+.chat .messages .message::after {
+    content: ' ';
+    display: block;
+    clear: both; 
+}
+
 .chat .message-oscar {
     padding-left: 90px;
     float: left;

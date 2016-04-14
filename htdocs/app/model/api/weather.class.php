@@ -22,7 +22,7 @@ class Weather extends Api {
     ];
 
     const WEATHER_PREFIX = [
-        '01' => 'sunny',
+        '01' => 'beautiful',
         '02' => 'cloudy',
         '03' => 'cloudy',
         '04' => 'cloudy',
@@ -64,6 +64,7 @@ class Weather extends Api {
 
     public function getDayPeriod() {
         $seconds = time() - strtotime('today');
+        var_dump($seconds); exit;
         foreach (self::DAY_PERIODS as $name => $period) {
             if ($seconds < $period * self::HOURS_IN_SECONDS) {
                 return $name;
