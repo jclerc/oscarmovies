@@ -41,6 +41,15 @@ class Chat extends Controller {
             } else if (stripos($message, 'cat') > -1) {
                 $data['gif'] = $this->api->giphy->get('cat');
                 $data['message'] = 'I HEARD YOU SAY CAT ?';
+            } else if (stripos($message, 'i want to see a ') === 0) {
+                $genre = substr($message, strlen('i want to see a '));
+                $movies = $this->api->movies->findByGenre($genre);
+                if (isset($movies->results) and count($movies->results) > 0) {
+                    $movie = $movies->results[ rand(0, count($movies->results) - 1) ];
+                    $data['message'] = 'What about ' . $movie->title . ' ?';
+                } else {
+                    $data['message'] = 'I DONT KNOW WHAT GENRE IS ' . $genre;
+                }
             }
 
             $this->view($data);

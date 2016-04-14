@@ -28,6 +28,7 @@
             "availability": "Model\\Api\\Availability",
             "giphy":        "Model\\Api\\Giphy",
             "ip":           "Model\\Api\\Ip",
+            "movies":       "Model\\Api\\Movies",
             "weather":      "Model\\Api\\Weather"
         }
     }
