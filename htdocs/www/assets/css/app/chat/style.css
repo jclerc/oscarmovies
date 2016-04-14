@@ -93,6 +93,7 @@
     max-width: 100%;
     height: auto;
     display: block;
+    padding: 5px 0;
 }
 
 .chat .message-oscar .avatar {
