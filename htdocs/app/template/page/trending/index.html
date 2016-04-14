@@ -8,14 +8,11 @@
 <div class="mosaic">
   <div class="wrap">
     <ul>
-      <li style="background-image: url('http://dummyimage.com/500x680/d6d6d6/000000.jpg')"></li>
+      <li style="background-image: url('http://image.tmdb.org/t/p/w500{{ featuring.poster_path }}')"></li>
       	<ul>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
-      		<li style="background-image: url('http://dummyimage.com/242x330/d6d6d6/000000.jpg')"></li>
+      		{% for movie in movies %}
+      		<li style="background-image: url('http://image.tmdb.org/t/p/w185{{ movie.poster_path }}')"></li>
+      		{% endfor %}
       	</ul>
     </ul>
   </div>

@@ -12,20 +12,25 @@
 	color: white;
 	height: 100%;
 	width: 100%;
+	overflow: hidden;
 }
 
-.mosaic > .wrap {
+/*.mosaic > .wrap {
 	position: relative;
 	width: 100%;
 	height: 100%;
 	padding: 2%;
 	text-align: center;
 
-}
+}*/
 
 .mosaic > .wrap > ul > li,ul {
 	display: inline-block;
 	position: relative;
+}
+
+.mosaic > .wrap ul {
+	margin: 1%;
 }
 
 
@@ -58,9 +63,9 @@
 	width: 500px;*/
 	height: 90%;
 	width: 40%;
-	background-size: cover;
-	border: solid 1px white;
-	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: top center;
 
 }
 

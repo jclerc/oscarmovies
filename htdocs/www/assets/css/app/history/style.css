@@ -56,7 +56,7 @@
   z-index: 19;
 	display: inline-block;
 	vertical-align: middle;
-	/* height: 100%; */
+	height: 100%;
 	width: 200px;
 	-webkit-transition: .4s ease-out;
 			  transition: .4s ease-out;
@@ -66,7 +66,7 @@
 .carousel > .wrap > ul > li:first-child {
   margin: 0;
 }
-
+/*
 .carousel > .wrap > ul > li > img {
   display: block;
   height: 100%;
@@ -74,7 +74,7 @@
   position: relative;
   -webkit-transition: 2s ease;
   		  transition: 2s ease;
-}
+}*/
 
 
 /* activate poster */
@@ -87,21 +87,23 @@
 
 /* description and description elements */
 .carousel > .wrap > ul > li > .movie-description {
+  position: absolute;
+  bottom : -200px;
   text-transform: uppercase;
   font-weight: 400;
   font-size: .9em;
   margin: 12px 0 12px 0;
-  display:none;
+  display: none;
   transition: all 1s;
   padding-bottom: 100px;
 }
 
 .carousel > .wrap > ul > li > .movie-description > .tags > div{
-  font-size: .7em;
+  font-size: .6em;
   display: inline-block;
-  border: 1px solid;
+  border: .1em solid;
   border-radius: 20px;
-  padding: 5px;
+  padding: 8px;
 }
 
 .carousel > .wrap > ul > li > .movie-description > .movie-title{
@@ -110,13 +112,13 @@
   font-size: 1em;
 }
 
-.carousel > .wrap > ul > li > .movie-description > .movie-director{
+.carousel > .wrap > ul > li > .movie-description > .movie-vote{
   letter-spacing: 1px;
   font-size: .7em;
   padding-bottom: 6px;
 }
 
 /* activate description */
-.carousel > .wrap > ul > li.active > .movie-description {
+.carousel > .wrap > ul > li.active > .movie-description{
   display: block;
 }
