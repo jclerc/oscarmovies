@@ -190,10 +190,10 @@ body.with-nav {
 .side-panel .right-content {
     position: absolute;
     top: 0;
-    width: 300px;
+    min-width: 300px;
     right: 0;
     bottom: 0;
-    background: #3D3D45;
+    background: #191B28;
 }
 
 /*
