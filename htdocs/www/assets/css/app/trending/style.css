@@ -22,19 +22,17 @@
 }
 .mosaic > .wrap {
 	height: 100%;
-	width: 90%;
+	width: 95%;
 	margin: 0 auto;
 }
 
-
-/*big poster*/
-.mosaic > .wrap > .primary-mosaic > .featuring{
-	width: 100%;
+.mosaic > .wrap > .primary-mosaic {
+  width: 33.5%;
 	height: 100%;
-	overflow: hidden;
+  /*background: red;*/
+  overflow: hidden;
 	display: inline-block;
-
-	background-size: cover;
+  background-size: cover;
 	background-repeat: no-repeat;
 	background-position: top center;
 }
@@ -55,7 +53,7 @@
 	background-position: top center;
 	/*height: 330px;
 	width: 242px;*/
-	width: 32%; 
+	width: 32%;
 	height: 50%;
 	margin: 0;
 }
@@ -68,18 +66,21 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-  	text-transform: uppercase;
-  	font-weight: 400;
-  	font-size: 1.3em;
-    padding: 20% 1.2vw 20px 1.1vw;
-  	opacity: 0;
-  	transition: opacity .3s;
-  	background-color: rgba(0, 0, 0, 0.54);
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 1.3em;
+  padding: 20% 1.2vw 20px 1.1vw;
+	opacity: 0;
+	transition: opacity .3s;
+	background-color: rgba(0, 0, 0, 0.54);
 }
 
 .mosaic > .wrap > .primary-mosaic .movie-description {
-	padding-top: 18vh;
+	padding: 18vh 1.2vw 20px 1.1vw;
+  width: 33.5%;
+  left: 2.5%;
 	font-size: 1.8em;
+
 }
 
 /* DESCRIPTION */
@@ -108,11 +109,10 @@
 
 
 /* activate description */
-.mosaic > .wrap > .primary-mosaic .featuring:hover > .movie-description{
+.mosaic > .wrap > .primary-mosaic:hover > .movie-description{
 	opacity: 1;
 }
 
 .mosaic > .wrap > .secondary-mosaic .movie-unit:hover > .movie-description{
 	opacity: 1;
 }
-
