@@ -39,17 +39,6 @@ body.with-nav {
          url('../../fonts/MontserratLight.svg#MontserratLight') format('svg');
 }
 
-/*@font-face {
-    font-family: 'Montserrat';
-    font-weight: 700;
-    src: url('../../fonts/MontserratRegular.eot');
-    src: url('../../fonts/MontserratRegular.eot') format('embedded-opentype'),
-         url('../../fonts/MontserratRegular.woff2') format('woff2'),
-         url('../../fonts/MontserratRegular.woff') format('woff'),
-         url('../../fonts/MontserratRegular.ttf') format('truetype'),
-         url('../../fonts/MontserratRegular.svg#MontserratRegular') format('svg');
-}*/
-
 /*
  * --------------------------------
  *           Navigation

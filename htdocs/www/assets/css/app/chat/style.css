@@ -154,30 +154,30 @@
     float: left;
     width: 8px;
     height: 8px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    margin-top: 14px;
+    margin-bottom: 7px;
     margin-right: 4px;
     margin-left: 4px;
-    border-radius: 100px;
+    border-radius: 50%;
     background: #fff;
 }
 
 .chat .message-oscar .bubble .content .bubbles:first-child {
-  animation: bubbles 1.2s infinite;
+    animation: bubbles 1.2s infinite;
 }
 
 .chat .message-oscar .bubble .content .bubbles:nth-child(2) {
-  animation: bubbles 1.2s 0.2s infinite;
+    animation: bubbles 1.2s 0.2s infinite;
 }
 
 .chat .message-oscar .bubble .content .bubbles:last-child {
-  animation: bubbles 1.2s 0.4s infinite;
+    animation: bubbles 1.2s 0.4s infinite;
 }
 
 @keyframes bubbles {
-  0% {transform: translateY(0px);}
-  50% {transform: translateY(-10px);}
-  100% {transform: translateY(0px);}
+    0% {transform: translateY(0px);}
+    50% {transform: translateY(-10px);}
+    100% {transform: translateY(0px);}
 }
 
 .chat .message-user .content {

@@ -17,7 +17,6 @@
     var addReply = function (who, message, gif) {
         var $tpl = template.message[who];
         if ($tpl) {
-            $messageLoading.hide();
             $content = $tpl.clone().find('.content').text(message);
             if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', function (e) {
                 gotoBottom();
@@ -39,6 +38,7 @@
     $('.chat-box').on('submit', function (e) {
         e.preventDefault();
         var message = $input.val();
+        var timeoutLoading = null;
         $input.val('');
         if (message.length) {
             reply.user(message);
@@ -61,6 +61,9 @@
                 error: function () {
                     replied = true;
                     reply.oscar('Sorry, something went wrong..');
+                },
+                complete: function () {
+                    $messageLoading.hide();
                 }
             });
             setTimeout(function () {
@@ -68,7 +71,7 @@
                     $messageLoading.show();
                     gotoBottom();
                 }
-            }, 1);
+            }, 1000);
         }
     });
 
