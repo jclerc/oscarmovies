@@ -286,12 +286,13 @@
   width: 300px;
   height: 100vh;
   background: #191B28;
-  display: none;
+  display: block;
+  transition: all .3s;
+  transform: translateX(100%);
 }
 
-.show {
-  display: block;
-  animation: open-recommendation 1s ease forwards;
+.chat-recommendation.show {
+  transform: translateX(0);
 }
 
 @keyframes open-recommendation {
