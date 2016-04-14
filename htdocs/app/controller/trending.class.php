@@ -19,15 +19,8 @@ class Trending extends Controller {
             $movie->genre_name = $this->api->movies->getGenreName($id);
         }
 
-        $this->set('featuring', $movies[0]);
-        $this->set('movies', [
-            $movies[1],
-            $movies[2],
-            $movies[3],
-            $movies[4],
-            $movies[5],
-            $movies[6],
-        ]);
+        $this->set('featuring', array_shift($movies));
+        $this->set('movies', $movies);
 
     }
 

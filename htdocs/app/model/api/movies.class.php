@@ -9,7 +9,7 @@ use Model\Mapper\Cache;
  */
 class Movies extends Api {
 
-    const API_QUERY = 'https://api.themoviedb.org/3/{query}?api_key=b2c09eb301c08aec545e015ab0fb2a40';
+    const API_QUERY = 'https://api.themoviedb.org/3/{url}?api_key=b2c09eb301c08aec545e015ab0fb2a40{query}';
 
     public function findByGenre($genre) {
         $id = $this->getGenreId($genre);
@@ -20,11 +20,18 @@ class Movies extends Api {
     }
 
     public function trending() {
-        return $this->query('discover/movie');
+        return $this->query('discover/movie', [
+            'vote_average.gte' => 7,
+            'primary_release_date.gte' => date('Y-m-d', time() - 86400 * 30 * 6),
+        ]);
     }
 
-    private function query($query) {
-        $response = $this->callJson('query', ['query' => $query], Cache::EXPIRE_WEEK);
+    private function query($url, $params = []) {
+        $query = '';
+        foreach ($params as $key => $value) {
+            $query .= '&' . urlencode($key) . '=' . urlencode($value);
+        }
+        $response = $this->callJson('query', ['url' => $url, 'query' => $query], Cache::EXPIRE_WEEK);
         return isset($response->results) ? $response->results : $response;
     }
 
