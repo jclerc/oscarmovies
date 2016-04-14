@@ -60,8 +60,8 @@
 	vertical-align: middle;
 	height: 100%;
 	width: 210px;
-	-webkit-transition: .4s ease-out;
-			  transition: .4s ease-out;
+	-webkit-transition: .3s ease-out;
+			    transition: .3s ease-out;
 	opacity: .2;
   background-size: cover;
   font-size: 16px;
@@ -70,16 +70,6 @@
 .carousel > .wrap > ul > li:first-child {
   margin: 0;
 }
-/*
-.carousel > .wrap > ul > li > img {
-  display: block;
-  height: 100%;
-  vertical-align: bottom;
-  position: relative;
-  -webkit-transition: 2s ease;
-  		  transition: 2s ease;
-}*/
-
 
 /* activate poster */
 .carousel > .wrap > ul > .active {
@@ -92,14 +82,14 @@
 /* description and description elements */
 .carousel > .wrap > ul > li > .movie-description {
   position: absolute;
-  bottom : -200px;
+  bottom : -205px;
   text-transform: uppercase;
   font-weight: 400;
   font-size: .9em;
-  margin: 12px 0 12px 0;
-  display: none;
-  transition: all 1s;
+  margin: 15px 0 12px 0;
+  opacity: 0;
   padding-bottom: 100px;
+  transition: opacity .9s;
 }
 
 .carousel > .wrap > ul > li > .movie-description > .tags > div{
@@ -112,17 +102,18 @@
 
 .carousel > .wrap > ul > li > .movie-description > .movie-title{
   letter-spacing: 1px;
-  padding: 7px 0 3px 0;
+  padding: 7px 0 5px 0;
   font-size: 1em;
+  font-weight: 600;
 }
 
 .carousel > .wrap > ul > li > .movie-description > .movie-vote{
   letter-spacing: 1px;
   font-size: .7em;
-  padding-bottom: 6px;
+  padding-bottom: 10px;
 }
 
 /* activate description */
 .carousel > .wrap > ul > li.active > .movie-description{
-  display: block;
+  opacity: 1;
 }
