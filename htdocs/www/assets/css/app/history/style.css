@@ -122,7 +122,7 @@
 	  z-index: 19;
 		display: inline-block;
 		vertical-align: middle;
-		height: 90%;
+		height: 100%;
 		width: 210px;
 		-webkit-transition: .3s ease-out;
 				    transition: .3s ease-out;
@@ -130,9 +130,25 @@
 	  background-size: cover;
 	  font-size: 16px;
 	}
+
+	.carousel > .wrap {
+		/*margin-top: -0px;*/
+		padding-top: 20px;
+		height: 120%;
+	  overflow: hidden;
+	}
+
+	.carousel > .wrap > ul {
+	  list-style: none;
+	  white-space: nowrap;
+	  height: 390px;
+	  position: absolute;
+	  margin-left: 40%;
+	  font-size: 0;
+	}
 }
 
-@media screen and (min-height: 200px) and (max-height: 675px) {
+/*@media screen and (min-height: 200px) and (max-height: 675px) {
 	.carousel > .wrap > ul > li {
 		position: relative;
 	  z-index: 19;
@@ -146,4 +162,4 @@
 	  background-size: cover;
 	  font-size: 16px;
 	}
-}
+}*/
