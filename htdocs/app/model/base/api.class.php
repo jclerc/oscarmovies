@@ -9,7 +9,7 @@ use Base\Model;
 abstract class Api extends Model {
 
     protected function callJson($api, array $params = [], $expiration = null) {
-        return json_decode($this->callApi($api, $params, $expiration = null));
+        return json_decode($this->callApi($api, $params, $expiration));
     }
 
     protected function callApi($api, array $params = [], $expiration = null) {

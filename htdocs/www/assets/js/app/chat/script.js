@@ -52,7 +52,7 @@
                 'dataType': 'JSON',
                 success: function (json) {
                     replied = true;
-                    if (json && json.success && json.data && json.data.message) {
+                    if (json && json.success && json.data && (json.data.message || json.data.gif || json.data.movie)) {
                         reply.oscar(json.data.message, json.data.gif);
                     } else {
                         reply.oscar('Sorry, something went wrong..');

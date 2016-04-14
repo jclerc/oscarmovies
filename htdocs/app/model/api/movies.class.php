@@ -19,8 +19,13 @@ class Movies extends Api {
         return null;
     }
 
+    public function trending() {
+        return $this->query('discover/movie');
+    }
+
     private function query($query) {
-        return $this->callJson('query', ['query' => $query], Cache::EXPIRE_WEEK);
+        $response = $this->callJson('query', ['query' => $query], Cache::EXPIRE_WEEK);
+        return isset($response->results) ? $response->results : null;
     }
 
     private function getGenreId($genre) {
