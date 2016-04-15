@@ -15,14 +15,15 @@
         }
     };
 
+    var lastSuggestion = null;
+
     var addReply = function (who, message, gif, movie) {
         var $tpl = template.message[who];
         if ($tpl) {
             $content = $tpl.clone().find('.content').text(message);
-            if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', function (e) {
-                gotoBottom();
-            }));
+            if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', gotoBottom));
             if (movie) {
+                lastSuggestion = movie;
                 $recommendation.addClass('show');
                 $recommendation.find('.poster-bg').css('background-image', 'url(http://image.tmdb.org/t/p/w342' + movie.poster_path + ')');
                 $recommendation.find('.movie-title').text(movie.title);
@@ -49,6 +50,38 @@
         oscar: function (message, gif, movie) { addReply('oscar', message, gif, movie); },
     };
 
+    var movieAction = function (action) {
+        $.ajax({
+            url: location.href,
+            data: {
+                action: action,
+                movie: lastSuggestion
+            },
+            'method': 'POST',
+            'dataType': 'JSON',
+            success: function (json) {
+                if (json && json.success && json.data && (json.data.message || json.data.gif || json.data.movie)) {
+                    reply.oscar(json.data.message, json.data.gif, json.data.movie);
+                }
+            },
+            complete: function () {
+                $messageLoading.hide();
+            }
+        });
+    };
+
+    $('.btn-accept').on('click', function () {
+        movieAction('accept');
+    });
+
+    $('.btn-deny').on('click', function () {
+        movieAction('deny');
+    });
+
+    $('.btn-already-seen').on('click', function () {
+        movieAction('already-seen');
+    });
+
     $('.chat-box').on('submit', function (e) {
         e.preventDefault();
         var message = $input.val();
@@ -60,7 +93,8 @@
             $.ajax({
                 url: location.href,
                 data: {
-                    message: message
+                    message: message,
+                    action: 'converse'
                 },
                 'method': $(this).attr('method'),
                 'dataType': 'JSON',

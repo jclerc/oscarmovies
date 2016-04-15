@@ -81,9 +81,23 @@ class Chat extends Controller {
             // Get what we have
             $post = $request->getAjax();
             $message = $post['message'];
+            $action = $post['action'];
             $id = $this->session->get('converse.id');
 
-            $data = $this->converse($id, $message);
+            if ($action === 'converse') {
+                $data = $this->converse($id, $message);
+            } else if ($action === 'deny' or $action === 'already-seen') {
+                $movie = $this->find();
+                if ($movie === true) {
+                    $data = ['message' => 'Please tell me more to have other suggestions!'];
+                } else if ($movie === false) {
+                    $data = ['message' => 'We did\'nt found any movies..'];
+                } else {                
+                    $data = ['movie' => $movie];
+                }
+            } else if ($action === 'accept') {
+                var_dump($post['movie']); exit;
+            }
             $this->view($data);
         
         }
@@ -172,8 +186,12 @@ class Chat extends Controller {
 
     }
 
-    private function find($entities) {
+    private function find($entities = null) {
         $params = [];
+
+        if (!isset($entities)) {
+            $entities = $this->session->get('converse.entities');
+        }
 
         foreach ($entities as $name => $entity) {
             switch ($name) {
@@ -204,6 +222,7 @@ class Chat extends Controller {
                     $paramName = 'primary_release_date.gte';
                 case 'single_year':
                     $paramName = 'year';
+                    $entity = trim(str_replace(['before','after'], '', $entity));
 
                     if (ctype_digit($entity) and strlen($entity) === 4) $params[$paramName] = $entity;
                     break;
