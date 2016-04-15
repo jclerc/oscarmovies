@@ -60,6 +60,43 @@
  *
  */
 
+.proposal span {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.proposal .btn-container {
+  width: 312px;
+  margin: auto;
+}
+.proposal .btn-container .chat-btns {
+  display: inline-block;
+  padding: 10px 15px;
+  color: white;
+  text-transform: uppercase;
+  line-height: 1em;
+  font-size: 0.8em;
+  border-radius: 50px;
+  margin-right: 20px;
+}
+
+.proposal .btn-container .chat-btns:last-child {
+  margin-right: 0px !important;
+}
+
+.btn-deny {
+  background-color: #1B1B24;
+}
+
+.btn-already-seen {
+  background: #535355;
+}
+
+.btn-accept {
+  background: #554B6D;
+}
 .chat {
     height: 100%;
     padding-bottom: 40px;
