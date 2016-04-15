@@ -3,6 +3,7 @@
 namespace Controller;
 use Base\Controller;
 use Model\Service\Request;
+use Model\Domain\Suggestion;
 
 /**
  * Chat controller
@@ -30,8 +31,22 @@ class Chat extends Controller {
         'Oh dear.. 😱 What did you intend to say?',
     ];
 
+    const DEFAULT_SUGGESTION = [
+        'Here is another suggestion! 😉',
+        'What about this ? 🙃',
+        'You should like this movie!',
+        'I think this movie may interest you.',
+        'I\'m sure you will enjoy this movie! 😀',
+    ];
+
+    const DEFAULT_NOTHING_FOUND = [
+        'Sorry, no movies match what you told me.. 😢 <br>So, what do you want ?',
+        'I can\'t find any movies.. <br>Let\'s start again !',
+        'Nothing found.. Maybe you were a bit too specific.. 🤔 <br>So, tell me what do you want.',
+        'Oops, no movies could be found with that.. <br>New try, what do you have in mind ?',
+    ];
+
     const PARAMS = [
-        'hour',
         'actor',
         'country',
         'genre',
@@ -42,6 +57,14 @@ class Chat extends Controller {
         'after_year',
         'single_year',
     ];
+
+    private function getRandomNotFound() {
+        return $this->getRandomMessage(self::DEFAULT_NOTHING_FOUND, 'not.found');
+    }
+
+    private function getRandomSuggestion() {
+        return $this->getRandomMessage(self::DEFAULT_SUGGESTION, 'suggestion');
+    }
 
     private function getRandomSuccess() {
         return $this->getRandomMessage(self::DEFAULT_SUCCESS, 'success');
@@ -80,23 +103,60 @@ class Chat extends Controller {
 
             // Get what we have
             $post = $request->getAjax();
-            $message = $post['message'];
-            $action = $post['action'];
+            $message = isset($post['message']) ? $post['message'] : null;
+            $action = isset($post['action']) ? $post['action'] : null;
             $id = $this->session->get('converse.id');
 
             if ($action === 'converse') {
                 $data = $this->converse($id, $message);
             } else if ($action === 'deny' or $action === 'already-seen') {
                 $movie = $this->find();
-                if ($movie === true) {
-                    $data = ['message' => 'Please tell me more to have other suggestions!'];
-                } else if ($movie === false) {
-                    $data = ['message' => 'We did\'nt found any movies..'];
+                if (is_bool($movie)) {
+                    $data = ['message' => $this->getRandomNotFound()];
                 } else {                
-                    $data = ['movie' => $movie];
+                    $data = [
+                        'message' => $this->getRandomSuggestion(),
+                        'movie' => $movie
+                    ];
                 }
             } else if ($action === 'accept') {
-                var_dump($post['movie']); exit;
+                $response = 'Great !';
+                if (isset($post['movie']['title'])) {
+                    $response .= ' I hope you will enjoy ' . $post['movie']['title'] . ' !';
+                    $availability = $this->api->availability->get($post['movie']['title']);
+                    if (!empty($availability)) {
+                        $response .= '<br>You can view it on ';
+                        $i = 0;
+                        $last = count((array) $availability) - 1;
+                        foreach ($availability as $service) {
+                            if ($i === 0) {
+                                
+                            } else if ($i === $last) {
+                                $response .= ', or ';
+                            } else {
+                                $response .= ', ';
+                            }
+                            $response .= '<a target="_blank" href="' . $service->direct_url . '">' . trim(str_ireplace('rental', '', $service->friendlyName)) . '</a>';
+                            $i++;
+                        }
+                        $response .= '.';
+                    }
+                }
+                if ($this->auth->isLogged() and isset($post['movie']) and isset($post['movie']['id'])) {
+                    $suggestion = $this->di->create(Suggestion::class);
+                    $suggestion->fromProperty('movie_id', $post['movie']['id']);
+                    if (!$suggestion->exists()) {
+                        $suggestion->create([
+                            'user_id' => $this->auth->getUser()->getId(),
+                            'movie_id' => $post['movie']['id'],
+                            'movie_data' => $post['movie'],
+                        ]);
+                    } else {
+                        $suggestion->setTime(time());
+                    }
+                    $suggestion->save();
+                }
+                $data = ['message' => $response];
             }
             $this->view($data);
         
@@ -120,6 +180,9 @@ class Chat extends Controller {
         // Call api
         $talk = $this->api->wit->talk($id, $message);
         // if (DEBUG) $data['debug'] = ['talk' => $talk];
+
+        // Retrieve message
+        $response = $talk['msg'];
 
         // Process entities
         foreach ($talk['entities'] as $name => $entity) {
@@ -152,15 +215,14 @@ class Chat extends Controller {
 
                 if (is_array($movie) or is_object($movie)) {
                     $data['movie'] = $movie;
-                } else if (DEBUG) {
-                    $data['debug']['movie'] = $movie;
+                } else if (is_bool($movie)) {
+                    $response = $this->getRandomNotFound();
+                    $this->session->set('converse.entities', []);
                 }
             }
         }
 
         // Chat response
-        $response = $talk['msg'];
-
         if (empty($response)) {
             if ($talk['success']) {
                 // Bot undestood, but not specific response

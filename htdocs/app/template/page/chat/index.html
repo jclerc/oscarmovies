@@ -10,17 +10,6 @@
                         <div class="bubble">
                             <div class="content">Hi, I'm Oscar !<br> How can I help you in this {{ weather }} ?</div>
                         </div>
-
-                        <div class="proposal">
-                          <span>What do you think ?</span>
-
-                          <div class="btn-container">
-                            <div class="chat-btns btn-deny">Refuse</div>
-                            <div class="chat-btns btn-already-seen">Already Seen</div>
-                            <div class="chat-btns btn-accept">Accept</div>
-                          </div>
-
-                        </div>
                     </div>
                 </div>
                 <div class="message message-oscar message-loading" style="display: none;">
@@ -32,6 +21,16 @@
                           <span class="bubbles"></span>
                         </div>
                     </div>
+                </div>
+                <div class="proposal" style="display: none">
+                    <div class="label">What do you think ?</div>
+
+                    <div class="btn-container">
+                        <div class="chat-btns btn-deny">Refuse</div>
+                        <div class="chat-btns btn-already-seen">Already Seen</div>
+                        <div class="chat-btns btn-accept">Accept</div>
+                    </div>
+
                 </div>
             </div>
             <div class="template hide" style="display: none">
@@ -82,6 +81,20 @@
                 </ul>
             </div>
             <div class="group">
+                <div class="label">Rating</div>
+                <ul class="samples">
+                    <li>It has to be rated at least 8</li>
+                    <li>With a rate about 8</li>
+                </ul>
+            </div>
+            <div class="group">
+                <div class="label">Release date</div>
+                <ul class="samples">
+                    <li>A movie released before 1960</li>
+                    <li>A movie released after 2010</li>
+                </ul>
+            </div>
+            <div class="group">
                 <div class="label">Country</div>
                 <ul class="samples">
                     <li>I like movies produced in France</li>
@@ -93,20 +106,6 @@
                 <ul class="samples">
                     <li>It has to last at least 1 hour</li>
                     <li>A long film, about 2 hours</li>
-                </ul>
-            </div>
-            <div class="group">
-                <div class="label">Release date</div>
-                <ul class="samples">
-                    <li>A movie released before 1960</li>
-                    <li>A movie released after 2010</li>
-                </ul>
-            </div>
-            <div class="group">
-                <div class="label">Rating</div>
-                <ul class="samples">
-                    <li>It has to be rated at least 8</li>
-                    <li>With a rate about 8</li>
                 </ul>
             </div>
         </div>

@@ -60,17 +60,18 @@
  *
  */
 
-.proposal span {
-  display: block;
+.proposal {
+  margin: 50px auto 30px auto;
+  width: 350px;    
   text-align: center;
+}
+
+.proposal .label {
   text-transform: uppercase;
+  margin-bottom: 30px;
   letter-spacing: 0.1em;
 }
 
-.proposal .btn-container {
-  width: 312px;
-  margin: auto;
-}
 .proposal .btn-container .chat-btns {
   display: inline-block;
   padding: 10px 15px;
@@ -80,6 +81,7 @@
   font-size: 0.8em;
   border-radius: 50px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .proposal .btn-container .chat-btns:last-child {
@@ -108,6 +110,12 @@
     position: relative;
     overflow: scroll;
     height: 100%;
+}
+
+.chat .converse::after {
+    content: ' ';
+    display: block;
+    clear: both;
 }
 
 .chat .messages .message {

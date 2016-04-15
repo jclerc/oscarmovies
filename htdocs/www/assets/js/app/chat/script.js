@@ -7,6 +7,7 @@
     var $converse = $('.converse');
     var $messageLoading = $('.message-loading');
     var $recommendation = $('.chat-recommendation');
+    var $proposal = $('.proposal');
 
     var template = {
         message: {
@@ -17,14 +18,25 @@
 
     var lastSuggestion = null;
 
-    var addReply = function (who, message, gif, movie) {
+    var addReply = function (who, message, gif, movie, raw) {
         var $tpl = template.message[who];
         if ($tpl) {
-            $content = $tpl.clone().find('.content').text(message);
-            if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', gotoBottom));
+            $content = $tpl.clone().find('.content');
+
+            if (raw) {
+                $content.html(message);
+            } else {
+                $content.text(message);
+            }
+
+            if (gif) {
+                $content.append($('<img>').attr('src', gif).addClass('gif').on('load', gotoBottom));
+            }
+
             if (movie) {
                 lastSuggestion = movie;
                 $recommendation.addClass('show');
+                $proposal.show();
                 $recommendation.find('.poster-bg').css('background-image', 'url(http://image.tmdb.org/t/p/w342' + movie.poster_path + ')');
                 $recommendation.find('.movie-title').text(movie.title);
                 $recommendation.find('.rating').text(movie.vote_average);
@@ -34,8 +46,10 @@
                 $recommendation.find('.year-tag').text(movie.release_date.substr(0, 4));
                 $recommendation.find('.country-tag').text(movie.original_language);
             } else {
+                $proposal.hide();
                 $recommendation.removeClass('show');
             }
+
             $content.end().appendTo($converse);
             gotoBottom();
         }
@@ -46,11 +60,12 @@
     };
 
     var reply = {
-        user: function (message, gif, movie) { addReply('user', message, gif, movie); },
-        oscar: function (message, gif, movie) { addReply('oscar', message, gif, movie); },
+        user: function (message, gif, movie) { addReply('user', message, gif, movie, false); },
+        oscar: function (message, gif, movie) { addReply('oscar', message, gif, movie, true); },
     };
 
     var movieAction = function (action) {
+        $proposal.hide();
         $.ajax({
             url: location.href,
             data: {
@@ -72,14 +87,17 @@
 
     $('.btn-accept').on('click', function () {
         movieAction('accept');
+        $messageLoading.show();
     });
 
     $('.btn-deny').on('click', function () {
         movieAction('deny');
+        $messageLoading.show();
     });
 
     $('.btn-already-seen').on('click', function () {
         movieAction('already-seen');
+        $messageLoading.show();
     });
 
     $('.chat-box').on('submit', function (e) {
