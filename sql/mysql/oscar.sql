@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: Apr 11, 2016 at 04:48 PM
+-- Generation Time: Apr 15, 2016 at 09:53 AM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `suggestions`
+--
+
+CREATE TABLE `suggestions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `movie_id` int(11) NOT NULL,
+  `movie_data` text NOT NULL,
+  `time` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -34,15 +48,17 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `picture` varchar(255) NOT NULL,
   `evaluation` varchar(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `users`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -55,10 +71,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `suggestions`
+--
+ALTER TABLE `suggestions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

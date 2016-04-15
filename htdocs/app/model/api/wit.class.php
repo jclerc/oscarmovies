@@ -69,7 +69,8 @@ class Wit extends Api {
         return json_decode($this->curl($url, [
             CURLOPT_POST => true,
             CURLOPT_HTTPHEADER => [
-                'Authorization: Bearer B4JZCQOKSVTGHOHKHD7ILKW7IHELLPYH',
+                // 'Authorization: Bearer B4JZCQOKSVTGHOHKHD7ILKW7IHELLPYH',
+                'Authorization: Bearer UYYN6G6CVXODMIJ2LDWT54JU6HTB3XPZ',
                 'Content-Type: application/json',
                 'Accept: application/json',
             ]
