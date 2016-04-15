@@ -118,27 +118,29 @@ class Chat extends Controller {
         $this->session->set('converse.entities', $entities);
 
         // Check if we have enough entities
-        $count = 0;
-        $hasYear = false;
-        foreach ($entities as $name => $entity) {
-            if (strpos($name, 'year') !== false) {
-                if (!$hasYear) {
-                    $hasYear = true;
+        if ($talk['success']) {
+            $count = 0;
+            $hasYear = false;
+            foreach ($entities as $name => $entity) {
+                if (strpos($name, 'year') !== false) {
+                    if (!$hasYear) {
+                        $hasYear = true;
+                        $count++;
+                    }
+                } else {
                     $count++;
                 }
-            } else {
-                $count++;
             }
-        }
 
-        if ($count >= 3) {
-            // Lets fetch a movie !
-            $movie = $this->find($entities);
+            if ($count >= 2) {
+                // Lets fetch a movie !
+                $movie = $this->find($entities);
 
-            if (is_array($movie) or is_object($movie)) {
-                $data['movie'] = $movie;
-            } else if (DEBUG) {
-                $data['debug']['movie'] = $movie;
+                if (is_array($movie) or is_object($movie)) {
+                    $data['movie'] = $movie;
+                } else if (DEBUG) {
+                    $data['debug']['movie'] = $movie;
+                }
             }
         }
 
@@ -151,7 +153,7 @@ class Chat extends Controller {
                 $response = $this->getRandomSuccess();
             } else {
                 $response = $this->getRandomError();
-                $json['gif'] = $this->api->giphy->get('nope');
+                $data['gif'] = $this->api->giphy->get('nope');
             }
         }
 

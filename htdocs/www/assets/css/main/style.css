@@ -190,7 +190,8 @@ body.with-nav {
 .side-panel .right-content {
     position: absolute;
     top: 0;
-    min-width: 300px;
+    width: 300px;
+    overflow: hidden;
     right: 0;
     bottom: 0;
     background: #191B28;
