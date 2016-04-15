@@ -50,7 +50,7 @@ abstract class Domain extends Model {
         });
     }
 
-    protected function from(callable $search) {
+    public function from(callable $search) {
         $stmt = $this->database->select()->from($this->getTable());
         // Use callback to populate where
         $search($stmt);
@@ -64,7 +64,7 @@ abstract class Domain extends Model {
         return false;
     }
 
-    protected function find(callable $search) {
+    public function find(callable $search) {
         $stmt = $this->database->select()->from($this->getTable());
         $search($stmt);
 

@@ -33,6 +33,12 @@
   overflow: auto;
 }
 
+.carousel .text {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
 .carousel > .wrap {
 	/*margin-top: -0px;*/
 	padding-top: 90px;
