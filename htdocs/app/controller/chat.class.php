@@ -30,6 +30,19 @@ class Chat extends Controller {
         'Oh dear.. 😱 What did you intend to say?',
     ];
 
+    const PARAMS = [
+        'hour',
+        'actor',
+        'country',
+        'genre',
+        'rating',
+        'start_year',
+        'end_year',
+        'before_year',
+        'after_year',
+        'single_year',
+    ];
+
     private function getRandomSuccess() {
         return $this->getRandomMessage(self::DEFAULT_SUCCESS, 'success');
     }
@@ -58,7 +71,9 @@ class Chat extends Controller {
             // We are starting a new conversation
             $this->session->set('converse.id', str_replace('.', '', uniqid('', true)));
             $this->session->delete('converse.entities');
-            $this->session->delete('converse.messages.success');
+            $this->session->delete('converse.suggestion.hash');
+            $this->session->delete('converse.suggestion.list');
+            $this->session->delete('converse.messages.error');
             $this->session->delete('converse.messages.error');
 
         } else {
@@ -67,58 +82,158 @@ class Chat extends Controller {
             $post = $request->getAjax();
             $message = $post['message'];
             $id = $this->session->get('converse.id');
-            $entities = $this->session->get('converse.entities');
-            if (!is_array($entities)) $entities = [];
 
-            // Prepare response
-            $data = [
-                'message' => null,
-                'gif' => null,
-                'movie' => null,
-            ];
-
-            // Call api
-            $talk = $this->api->wit->talk($id, $message);
-            if (DEBUG) $data['debug'] = $talk;
-
-            // Process entities
-            foreach ($talk['entities'] as $entity) {
-                # code...
-            }
-
-            $data['entities'] = $entities;
-            $this->session->set('converse.entities', $entities);
-
-            // Chat response
-            $response = $talk['msg'];
-
-            if (empty($response)) {
-                if ($talk['success']) {
-                    // Bot undestood, but not specific response
-                    $response = $this->getRandomSuccess();
-                } else {
-                    $response = $this->getRandomError();
-                    $json['gif'] = $this->api->giphy->get('nope');
-                }
-            }
-
-            $response = str_replace([';-)', ';)', ':-(', ':('], ['😉', '😉', '😞', '😞'], $response);
-
-            if (stripos($message, 'gif') === 0) {
-                $gif = substr($message, 3);
-                $response = '';
-                $data['gif'] = $this->api->giphy->get(trim($gif) ?: 'happy');
-            }
-
-            $data['message'] = $response;
-
-            // And pass data to AJAX
+            $data = $this->converse($id, $message);
             $this->view($data);
-
+        
         }
 
         $this->set('weather', $this->api->weather->getCurrentState());
 
+    }
+
+    private function converse($id, $message) {
+        $entities = $this->session->get('converse.entities');
+        if (!is_array($entities)) $entities = [];
+
+        // Prepare response
+        $data = [
+            'message' => null,
+            'gif' => null,
+            'movie' => null,
+        ];
+
+        // Call api
+        $talk = $this->api->wit->talk($id, $message);
+        // if (DEBUG) $data['debug'] = ['talk' => $talk];
+
+        // Process entities
+        foreach ($talk['entities'] as $name => $entity) {
+            if (in_array($name, self::PARAMS)) {
+                $entities[$name] = $entity;
+            }
+        }
+
+        if (DEBUG) $data['debug']['entities'] = $entities;
+        $this->session->set('converse.entities', $entities);
+
+        // Check if we have enough entities
+        $count = 0;
+        $hasYear = false;
+        foreach ($entities as $name => $entity) {
+            if (strpos($name, 'year') !== false) {
+                if (!$hasYear) {
+                    $hasYear = true;
+                    $count++;
+                }
+            } else {
+                $count++;
+            }
+        }
+
+        if ($count >= 3) {
+            // Lets fetch a movie !
+            $movie = $this->find($entities);
+
+            if (is_array($movie) or is_object($movie)) {
+                $data['movie'] = $movie;
+            } else if (DEBUG) {
+                $data['debug']['movie'] = $movie;
+            }
+        }
+
+        // Chat response
+        $response = $talk['msg'];
+
+        if (empty($response)) {
+            if ($talk['success']) {
+                // Bot undestood, but not specific response
+                $response = $this->getRandomSuccess();
+            } else {
+                $response = $this->getRandomError();
+                $json['gif'] = $this->api->giphy->get('nope');
+            }
+        }
+
+        $response = str_replace([';-)', ';)', ':-(', ':('], ['😉', '😉', '😞', '😞'], $response);
+
+        if (stripos($message, 'gif') === 0) {
+            $gif = substr($message, 3);
+            $response = '';
+            $data['gif'] = $this->api->giphy->get(trim($gif) ?: 'happy');
+        }
+
+        $data['message'] = $response;
+
+        // And pass data to AJAX
+        return $data;
+
+    }
+
+    private function find($entities) {
+        $params = [];
+
+        foreach ($entities as $name => $entity) {
+            switch ($name) {
+                case 'actor':
+                    $id = $this->api->movies->getPeopleId($entity);
+                    if ($id) $params['with_people'] = $id;
+                    break;
+                
+                case 'country':
+                    break;
+                
+                case 'genre':
+                    $id = $this->api->movies->getGenreId($entity);
+                    if ($id) $params['with_genres'] = $id;
+                    break;
+                
+                case 'rating':
+                    if (ctype_digit($entity)) $params['vote_average.gte'] = $entity;
+                    break;
+                
+                case 'start_year':
+                    $paramName = 'primary_release_date.gte';
+                case 'end_year':
+                    $paramName = 'primary_release_date.lte';
+                case 'before_year':
+                    $paramName = 'primary_release_date.lte';
+                case 'after_year':
+                    $paramName = 'primary_release_date.gte';
+                case 'single_year':
+                    $paramName = 'year';
+
+                    if (ctype_digit($entity) and strlen($entity) === 4) $params[$paramName] = $entity;
+                    break;
+                
+                default: break;
+            }
+        }
+
+        $movies = $this->api->movies->find($params);
+        if (is_array($movies)) {
+
+            $hash = hash('sha256', serialize($params));
+            $index = $this->session->get('converse.suggestion.list');
+
+            if (!is_int($index) or $hash !== $this->session->get('converse.suggestion.hash'))
+                $index = 0;
+
+            if (isset($movies[$index])) {
+                $movie = $movies[$index];
+                $this->session->set('converse.suggestion.list', $index + 1);
+                $this->session->set('converse.suggestion.hash', $hash);
+                $id = reset($movie->genre_ids);
+                $movie->genre_name = $this->api->movies->getGenreName($id);
+                return $movie;
+            } else {
+                // End of list
+                return true;
+            }
+
+        }
+        // Nothing found
+        return false;
     }
 
 }

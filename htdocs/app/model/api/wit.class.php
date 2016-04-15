@@ -32,7 +32,7 @@ class Wit extends Api {
                 if (count($entityArray) > 0) {
                     $entity = reset($entityArray);
                     if (isset($entity->type) and isset($entity->value) and $entity->type === 'value') {
-                        $data['entities'][$name][] = $entity->value;
+                        $data['entities'][$name] = $entity->value;
                     }
                 }
             }

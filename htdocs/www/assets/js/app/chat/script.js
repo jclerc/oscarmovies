@@ -6,6 +6,7 @@
     var $messages = $('.messages');
     var $converse = $('.converse');
     var $messageLoading = $('.message-loading');
+    var $recommendation = $('.chat-recommendation');
 
     var template = {
         message: {
@@ -14,13 +15,26 @@
         }
     };
 
-    var addReply = function (who, message, gif) {
+    var addReply = function (who, message, gif, movie) {
         var $tpl = template.message[who];
         if ($tpl) {
             $content = $tpl.clone().find('.content').text(message);
             if (gif) $content.append($('<img>').attr('src', gif).addClass('gif').on('load', function (e) {
                 gotoBottom();
             }));
+            if (movie) {
+                $recommendation.addClass('show');
+                $recommendation.find('.poster-bg').css('background-image', 'url(http://image.tmdb.org/t/p/w342' + movie.poster_path + ')');
+                $recommendation.find('.movie-title').text(movie.title);
+                $recommendation.find('.rating').text(movie.vote_average);
+                $recommendation.find('.movie-poster').css('background-image', 'url(http://image.tmdb.org/t/p/w342' + movie.poster_path + ')');
+                $recommendation.find('.movie-description').text(movie.overview);
+                $recommendation.find('.genre-tag').text(movie.genre_name);
+                $recommendation.find('.year-tag').text(movie.release_date.substr(0, 4));
+                $recommendation.find('.country-tag').text(movie.original_language);
+            } else {
+                $recommendation.removeClass('show');
+            }
             $content.end().appendTo($converse);
             gotoBottom();
         }
@@ -31,8 +45,8 @@
     };
 
     var reply = {
-        user: function (message, gif) { addReply('user', message, gif); },
-        oscar: function (message, gif) { addReply('oscar', message, gif); },
+        user: function (message, gif, movie) { addReply('user', message, gif, movie); },
+        oscar: function (message, gif, movie) { addReply('oscar', message, gif, movie); },
     };
 
     $('.chat-box').on('submit', function (e) {
@@ -53,7 +67,7 @@
                 success: function (json) {
                     replied = true;
                     if (json && json.success && json.data && (json.data.message || json.data.gif || json.data.movie)) {
-                        reply.oscar(json.data.message, json.data.gif);
+                        reply.oscar(json.data.message, json.data.gif, json.data.movie);
                     } else {
                         reply.oscar('Sorry, something went wrong..');
                     }

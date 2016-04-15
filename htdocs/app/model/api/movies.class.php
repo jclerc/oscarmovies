@@ -11,13 +11,17 @@ class Movies extends Api {
 
     const API_QUERY = 'https://api.themoviedb.org/3/{url}?api_key=b2c09eb301c08aec545e015ab0fb2a40{query}';
 
-    public function findByGenre($genre) {
-        $id = $this->getGenreId($genre);
-        if ($id) {
-            return $this->query('genre/' . $id . '/movies');
-        }
-        return null;
+    public function find($params) {
+        return $this->query('discover/movie', $params);
     }
+
+    // public function findByGenre($genre) {
+    //     $id = $this->getGenreId($genre);
+    //     if ($id) {
+    //         return $this->query('genre/' . $id . '/movies');
+    //     }
+    //     return null;
+    // }
 
     public function trending() {
         return $this->query('discover/movie', [
@@ -47,14 +51,25 @@ class Movies extends Api {
         return null;
     }
 
-    private function getGenreId($genre) {
+    public function getGenreId($genre) {
         $list = $this->query('genre/movie/list');
+        $genre = trim(str_replace('movie', '', $genre));
         if (isset($list->genres)) {
             foreach ($list->genres as $g) {
                 if (strtolower($g->name) === strtolower($genre)) {
                     return $g->id;
                 }
             }
+        }
+        return null;
+    }
+
+    public function getPeopleId($people) {
+        $list = $this->query('search/person', [
+            'query' => urlencode($people)
+        ]);
+        if (is_array($list) and count($list) > 0 and isset($list[0]->id)) {
+            return $list[0]->id;
         }
         return null;
     }
