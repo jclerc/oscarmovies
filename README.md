@@ -1,4 +1,4 @@
-# PHP_INTENSIVE
+# OscarMovies
 
 ### Demo
 Try it here: http://chat.pew.ovh
@@ -17,7 +17,7 @@ Try it here: http://chat.pew.ovh
 - MySQL or SQLite
 
 ### Getting started
-1. `git clone https://github.com/commit-master/PHP_INTENSIVE.git`
-2. `cd PHP_INTENSIVE`
+1. `git clone https://github.com/JClerc/OscarMovies.git`
+2. `cd OscarMovies`
 3. `composer install -d htdocs`
 4. Run your web server on `htdocs/www/`
