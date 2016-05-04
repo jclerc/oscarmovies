@@ -10,6 +10,7 @@ Try it here: http://chat.pew.ovh
 - [**Giphy**](http://giphy.com) for gifs
 - [**OpenWeatherMap**](http://openweathermap.org) to get current weather
 - [**IP-API**](http://ip-api.com) to get user's location
+- [**Facebook App**](https://developers.facebook.com/) for user connection
 
 ### Requirement
 - PHP 5.6+
