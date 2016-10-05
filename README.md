@@ -1,7 +1,9 @@
 # OscarMovies
 
 ### Demo
-Try it here: http://chat.pew.ovh
+Try it here: https://oscar.jclerc.com/
+
+*Update: Wit.ai – the bot used to reply – doesn't work with our app anymore*
 
 ### API used
 - [**Wit**](https://wit.ai), our bot
